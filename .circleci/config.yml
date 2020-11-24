@@ -95,7 +95,7 @@ jobs:
       - run:
           name: Run post-deploy tasks
           command: |
-            heroku run rails db:migrate
+            heroku run rails db:migrate --app ${HEROKU_APP_NAME}
 
 workflows:
   version: 2
