@@ -100,7 +100,7 @@ jobs:
 
 workflows:
   version: 2
-  rubocop_rspec_deploy:ｓ
+  rubocop_rspec_deploy:
     jobs:
       - rubocop
       - rspec
