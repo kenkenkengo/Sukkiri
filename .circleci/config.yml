@@ -92,6 +92,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             fi
+          no_output_timeout: 30m
       - run:
           name: Run post-deploy tasks
           command: |
@@ -99,7 +100,7 @@ jobs:
 
 workflows:
   version: 2
-  rubocop_rspec_deploy:
+  rubocop_rspec_deploy:ｓ
     jobs:
       - rubocop
       - rspec
