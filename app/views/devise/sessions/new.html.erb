@@ -6,7 +6,6 @@
         <h4 class="text-secondary">サインインフォーム</h4>
       </div>
       <%= form_with scope: resource, as: resource_name, url: session_path(resource_name), local: true do |f| %>
-        <%= devise_error_messages! %>
         <div class="form-group">
           <%= f.text_field :email, autofocus: true, placeholder: "メールアドレス", class: "form-control" %>
         </div>
