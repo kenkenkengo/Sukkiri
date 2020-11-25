@@ -1,0 +1,110 @@
+version: 2
+jobs:
+  rubocop:
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          - RAILS_ENV: test
+          - BUNDLER_VERSION: 2.0.2
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_HOST: '127.0.0.1'
+    working_directory: ~/Sukkiri
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.0.2
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+
+  rspec:
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          - RAILS_ENV: test
+          - BUNDLER_VERSION: 2.0.2
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_HOST: '127.0.0.1'
+    working_directory: ~/Sukkiri
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.0.2
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: mv ./config/database.yml.ci ./config/database.yml
+      - run:
+          name: Databasesetup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+      - run:
+          name: Run rspec
+          command: bundle exec rspec
+
+  deploy:
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          - RAILS_ENV: test
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_HOST: '127.0.0.1'
+    working_directory: ~/Sukkiri
+    steps:
+      - checkout
+      - run:
+          name: 'Install Heroku CLI, if necessary'
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              echo "Heroku is already installed. No operation was performed."
+            fi
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            fi
+          no_output_timeout: 30m
+      - run:
+          name: Run post-deploy tasks
+          command: |
+            heroku run rails db:migrate --app ${HEROKU_APP_NAME}
+
+workflows:
+  version: 2
+  rubocop_rspec_deploy:
+    jobs:
+      - rubocop
+      - rspec
+      - deploy:
+          requires:
+            - rubocop
+            - rspec
