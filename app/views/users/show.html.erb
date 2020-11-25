@@ -1,0 +1,7 @@
+<% provide(:title, @user.username) %>
+<h1>プロフィール</h1>
+<%= gravatar_for @user %><br>
+<%= @user.username %>, <%= @user.email %>
+<% if @user == current_user %>
+<%= link_to "プロフィールを編集", edit_user_registration_path %>
+<% end %>
