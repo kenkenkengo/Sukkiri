@@ -19,15 +19,6 @@
   margin: 50px auto;
 }
 
-.logo-img {
-  background-image: url("~logo.png");
-  background-repeat: no-repeat;
-  height: 56px;
-  width: 180px;
-  background-size: 160px;
-  background-size: 180px!important;
-}
-
 #error_explanation {
   color: red;
   ul {
@@ -44,19 +35,6 @@
 .form-control {
   border: 1px solid #dcdfe6;
   font-size: inherit;
-}
-
-.facebook {
-  height: 50px;
-  width: 50px;
-}
-
-.twitter {
-  background-image: image-url("/assets/images/t_logo.png");
-  background-repeat: no-repeat;
-  height: 36px;
-  width: 36px;
-  background-size: 36px !important;
 }
 
 .devise-link {
