@@ -16,8 +16,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       if user.provider == "facebook"
-        user.profile_photo = auth.info.profile_photo.
-          gsub("picture", "picture?type=large")
+        user.profile_photo = auth.info.profile_photo
       end
     end
   end
