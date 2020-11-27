@@ -77,8 +77,8 @@ RSpec.describe "Users", type: :system do
       fill_in "ユーザーネーム", with: "Example User2"
       fill_in "メールアドレス", with: "user2@example.com"
       click_button "変更する"
-      expect(page).to have_content "プロフィールが更新されました！"
-      expect(user.reload.name).to eq "Example User2"
+      expect(page).to have_content "アカウント情報を変更しました。"
+      expect(user.reload.username).to eq "Example User2"
       expect(user.reload.email).to eq "user2@example.com"
     end
 
