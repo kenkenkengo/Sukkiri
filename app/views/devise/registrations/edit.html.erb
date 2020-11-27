@@ -2,6 +2,9 @@
 <div class="col-md-offset-2 mb-4 edit-profile-wrapper">
   <div class="row">
     <div class="col-md-8 mx-auto">
+      <div class="form-group text-center">
+        <h4 class="text-secondary">プロフィール編集</h4>
+      </div>
       <div class="profile-form-wrap">
         <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true, method: :patch do |f| %>
         <%= render 'devise/shared/error_messages', resource: f.object %>
@@ -17,6 +20,7 @@
 
           <%= f.submit "変更する", class: "btn btn-primary" %>
         <% end %>
+        <a href="http://gravatar.com/emails" target="_blank">プロフィール写真を変更</a>
         <%= link_to "パスワード変更", edit_password_path(@user) %>
         <%= link_to "アカウント削除", user_registration_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %>
       </div>
