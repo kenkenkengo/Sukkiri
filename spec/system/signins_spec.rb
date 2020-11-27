@@ -34,13 +34,9 @@ RSpec.describe "Sessions", type: :system do
       end
 
       it "有効なユーザーでログインするとヘッダーが正しく表示される" do
-        expect(page).not_to have_link '', href: user_path(user)
-        expect(page).not_to have_link 'サインアウト', href: destroy_user_session_path
-
         fill_in "user_email", with: user.email
         fill_in "user_password", with: user.password
         click_button "サインイン"
-
         expect(page).to have_link '', href: user_path(user)
         expect(page).to have_link 'サインアウト', href: destroy_user_session_path
       end

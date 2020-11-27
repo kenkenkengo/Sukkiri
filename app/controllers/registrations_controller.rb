@@ -9,6 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
         bypass_sign_in(current_user)
         redirect_to edit_user_registration_path
       else
+        flash.now[:alert] = "パスワードを正しく入力してください"
         render :edit_password
       end
     else
