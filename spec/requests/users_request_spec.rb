@@ -1,21 +1,22 @@
-RSpec.describe "Users", type: :request do
+RSpec.describe "ユーザープロフィール", type: :request do
   let!(:user) { create(:user) }
 
-  context "サインインしている時" do
+  context "サインインしている場合" do
     before do
       login_as(user)
     end
 
-    it "httpリクエストは成功する" do
+    it "プロフィールページへのGETリクエストは成功する" do
       get user_path(user)
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status "200"
     end
   end
 
-  context "サインインしていない時" do
-    it "httpリクエストは失敗する" do
+  context "サインインしていない場合" do
+    it "サインインページへリダイレクトする" do
       get user_path(user)
-      expect(response).not_to have_http_status(:success)
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to new_user_session_path
     end
   end
 end
