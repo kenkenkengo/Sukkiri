@@ -1,0 +1,4 @@
+<h2><%= @group.name %></h2>
+<% if current_user == @group.admin_user %>
+<%= link_to "#{@group.name}のグループ編集", edit_group_path(@group) %>
+<% end %>
