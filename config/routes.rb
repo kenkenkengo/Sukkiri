@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get :about, to: 'static_pages#about'
   get :terms, to: 'static_pages#terms'
-  resources :users, only: [:show]
+  resources :users, only: [:index, :show]
+  resources :groups, only: [:show, :new, :create, :destroy, :edit, :update]
 end
