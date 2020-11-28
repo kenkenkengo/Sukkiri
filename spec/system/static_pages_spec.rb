@@ -1,12 +1,35 @@
 RSpec.describe "静的ページ", type: :system do
   describe "homeページ" do
-    context "ページ全体" do
+    let!(:user) { create(:user) }
+
+    before do
+      visit root_path
+    end
+
+    it "Sukkiriの文字列が存在する" do
+      expect(page).to have_content 'Sukkiri'
+    end
+
+    context "ログインしていない場合" do
+      it "「新規登録」が表示される" do
+        click_on('新規登録')
+        expect(current_path).to eq new_user_registration_path
+      end
+
+      it "「サインイン」が表示される" do
+        click_on('サインイン')
+        expect(current_path).to eq new_user_session_path
+      end
+    end
+
+    context "ログインしている場合" do
       before do
+        login_as(user)
         visit root_path
       end
 
-      it "Sukkiriの文字列が存在する" do
-        expect(page).to have_content 'Sukkiri'
+      it "「マイページ」が表示される" do
+        expect(page).to have_link 'マイページ', href: user_path(user)
       end
     end
   end
