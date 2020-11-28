@@ -3,10 +3,10 @@
   <div class="card devise-card">
     <div class="form-wrap">
       <div class="form-group text-center">
-        <p class="text-secondary">写真を管理してペーパーレスを目指そう</p>
+        <h4 class="text-secondary">新規登録</h4>
       </div>
       <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
+        <%= devise_error_messages! %>
         <div class="form-group">
           <%= f.text_field :name, autofocus: true, placeholder: "フルネーム", class: "form-control" %>
         </div>
