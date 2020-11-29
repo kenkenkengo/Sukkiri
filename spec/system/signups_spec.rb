@@ -17,7 +17,7 @@ RSpec.describe "Signups", type: :system do
       expect(page).to have_content "アカウント登録が完了しました"
     end
 
-    it "無効なユーザーの登録失敗フラッシュ表示" do
+    it "無効なユーザーの登録失敗表示" do
       fill_in "ユーザーネーム", with: ""
       fill_in "メールアドレス", with: "user@example.com"
       fill_in "パスワード", with: "password"

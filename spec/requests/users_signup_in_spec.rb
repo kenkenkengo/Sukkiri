@@ -2,7 +2,7 @@ RSpec.describe "Signup_in", type: :request do
   let!(:user_params) { attributes_for(:user) }
   let!(:invalid_user_params) { attributes_for(:user, username: "") }
 
-  context "新規登録" do
+  describe "新規登録" do
     before do
       get new_user_registration_path
     end
@@ -28,7 +28,7 @@ RSpec.describe "Signup_in", type: :request do
     end
   end
 
-  context "サインイン" do
+  describe "サインイン" do
     it "httpリクエストは成功する" do
       get new_user_session_path
       expect(response).to have_http_status(:success)

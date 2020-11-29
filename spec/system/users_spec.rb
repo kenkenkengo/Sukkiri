@@ -1,6 +1,6 @@
 RSpec.describe "Users", type: :system do
   let(:user) { create(:user) }
-  let(:other_user) { create(:user, email: "other@example.com") }
+  let(:group) { create(:group, admin_user_id: user.id) }
 
   describe "プロフィールページ" do
     before do
@@ -21,9 +21,15 @@ RSpec.describe "Users", type: :system do
       it "プロフィール編集ページへのリンクが表示されていることを確認" do
         expect(page).to have_link 'プロフィールを編集', href: edit_user_registration_path
       end
+
+      it "グループ新規作成ページへのリンクが表示されていることを確認" do
+        expect(page).to have_link 'グループ新規作成', href: new_group_path
+      end
     end
 
     context "サインインユーザーでないユーザープロフィールを表示する時" do
+      let(:other_user) { create(:user, email: "other@example.com") }
+
       it "プロフィール編集ページへのリンクが表示されていないことを確認" do
         logout(:user)
         login_as(other_user)
