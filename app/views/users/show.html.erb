@@ -4,13 +4,18 @@
 <%= @user.username %>, <%= @user.email %>
 <% if @user == current_user %>
 <%= link_to "プロフィールを編集", edit_user_registration_path %>
+<%= link_to "グループ新規作成", new_group_path %>
 <% end %>
-<h3><%= "#{@user.username}のグループ一覧" %></h3>
+<h3><%= "#{@user.username}が管理者であるグループ一覧" %></h3>
+<% @admin_groups.each do |group| %>
+  <li>
+    <%= link_to group.name, group_path(group) %>
+  </li>
+<% end %>
+<h3><%= "#{@user.username}が入室できるグループ一覧" %></h3>
 <% @user.groups.each do |group| %>
   <li>
     <%= link_to group.name, group_path(group) %>
   </li>
 <% end %>
-<% if @user == current_user %>
-<%= link_to "グループ新規作成", new_group_path %>
-<% end %>
+
