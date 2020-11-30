@@ -9,13 +9,13 @@
 <h3><%= "#{@user.username}が管理者であるグループ一覧" %></h3>
 <% @admin_groups.each do |group| %>
   <li>
-    <%= link_to group.name, group_path(group) %>
+    <%= link_to group.name, group_posts_path(group) %>
   </li>
 <% end %>
 <h3><%= "#{@user.username}が入室できるグループ一覧" %></h3>
 <% @user.groups.each do |group| %>
   <li>
-    <%= link_to group.name, group_path(group) %>
+    <%= link_to group.name, group_posts_path(group) %>
   </li>
 <% end %>
 

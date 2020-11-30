@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   get :about, to: 'static_pages#about'
   get :terms, to: 'static_pages#terms'
   resources :users, only: [:index, :show]
-  resources :groups, only: [:show, :new, :create, :destroy, :edit, :update]
+  resources :groups, only: [:new, :create, :destroy, :edit, :update] do
+    resources :posts, only: [:index, :create]
+  end
 end

@@ -1,10 +1,7 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :destroy, :edit, :update]
+  before_action :set_group, only: [:destroy, :edit, :update]
   before_action :authenticate_user!
   before_action :admin_user!, only: [:destroy, :edit, :update]
-
-  def show
-  end
 
   def new
     @group = Group.new
@@ -46,7 +43,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :admin_user_id, user_ids: [])
+    params.require(:group).permit(:name, :admin_user_id, user_ids: [] )
   end
 
   def set_group
