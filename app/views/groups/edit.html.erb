@@ -8,6 +8,7 @@
         </div>
         <%= render 'form', group: @group %>
           <%= link_to "グループ削除", group_path(@group), method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %>
+          <%= link_to "投稿一覧ページ", group_posts_path(@group) %>
       </div>
     </div>
   </div>

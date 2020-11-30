@@ -1,3 +1,4 @@
+<% provide(:title, "グループ詳細") %>
 <div class="wrapper">
   <% if current_user == @group.admin_user %>
   <%= link_to "#{@group.name}のグループ編集", edit_group_path(@group) %>
