@@ -1,6 +1,5 @@
 RSpec.describe "グループ新規登録", type: :system do
-  let(:user) { create(:user) }
-  let(:group) { create(:group, admin_user_id: user.id) }
+  let(:user) { create(:user, :user_with_groups) }
 
   describe "グループ新規登録ページ" do
     before do
@@ -25,7 +24,8 @@ RSpec.describe "グループ新規登録", type: :system do
     end
 
     it "既に存在するグループ名でグループ作成する場合の失敗表示" do
-      fill_in "グループ名", with: "#{group.name}"
+      group = user.groups.first
+      fill_in "グループ名", with: group.name
       click_button "登録する"
       expect(page).to have_content "グループ名はすでに存在します"
     end
