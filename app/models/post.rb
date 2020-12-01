@@ -2,8 +2,6 @@ class Post < ApplicationRecord
   belongs_to :group
   belongs_to :user
   validate :image_size
-  default_scope -> { order(created_at: :desc) }
-
   validates :image, presence: true
   mount_uploader :image, ImageUploader
 

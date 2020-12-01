@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = @group.posts.includes(:user)
+    @posts = @group.posts.includes(:user).order(id: "DESC")
   end
 
   def create

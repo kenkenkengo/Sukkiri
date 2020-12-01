@@ -1,14 +1,13 @@
+<% provide(:title, "投稿編集") %>
 <div class="form">
   <%= form_for [@group, @post] do |f| %>
   <%= f.label :写真名 %>
   <%= f.text_field :content, class: 'form__message', placeholder: '写真名を入力' %>
-  <div class="form__mask">
-    <%= f.label :image, class: 'form__mask__image' do %>
-    <%= f.file_field :image, class: 'hidden' %>
-    <% end %>
-    <%= f.submit 'Send', class: 'form__submit' %>
-    <% end %>
-  </div>
+  <%= f.label :image, class: 'form__mask__image' do %>
+  <%= f.file_field :image, class: 'hidden' %>
+  <% end %>
+  <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
   <%= link_to "投稿削除", group_post_path(@group, @post), method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %>
   <%= link_to "投稿一覧へ戻る", group_posts_path(@group) %>
 </div>
