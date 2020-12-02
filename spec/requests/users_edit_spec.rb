@@ -7,8 +7,6 @@ RSpec.describe "プロフィール編集", type: :request do
       login_as(user)
       get edit_user_registration_path(user)
       expect(response).to have_http_status "200"
-      patch user_registration_path, params: { user: user_params }
-      expect(response.body).to include "アカウント情報を変更しました。"
     end
   end
 
