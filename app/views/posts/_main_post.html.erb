@@ -1,0 +1,13 @@
+<div class="form">
+  <%= form_for [@group, @post] do |f| %>
+  <%= f.label :写真名 %>
+  <%= f.text_field :content, class: 'form__message', placeholder: '写真名を入力' %>
+  <%= f.label :image, class: 'form__mask__image' do %>
+  <%= f.file_field :image, class: 'hidden' %>
+  <% end %>
+  <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="posts">
+  <%= render @posts, group: @group %>
+</div>

@@ -1,35 +1,5 @@
 RSpec.describe "Users", type: :system do
-  let(:user) { create(:user) }
-  let(:other_user) { create(:user, email: "other@example.com") }
-
-  describe "新規登録ページ" do
-    before do
-      visit new_user_registration_path
-    end
-
-    it "「新規登録」の文字列が存在する" do
-      expect(page).to have_content '新規登録'
-    end
-
-    it "有効なユーザーの登録成功フラッシュ表示" do
-      fill_in "ユーザーネーム", with: "Example User"
-      fill_in "メールアドレス", with: "user@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワードの確認", with: "password"
-      click_button "登録する"
-      expect(page).to have_content "アカウント登録が完了しました"
-    end
-
-    it "無効なユーザーの登録失敗フラッシュ表示" do
-      fill_in "ユーザーネーム", with: ""
-      fill_in "メールアドレス", with: "user@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワードの確認", with: "foobar"
-      click_button "登録する"
-      expect(page).to have_content "ユーザーネームを入力してください"
-      expect(page).to have_content "確認用パスワードとパスワードの入力が一致しません"
-    end
-  end
+  let(:user) { create(:user, :user_with_groups) }
 
   describe "プロフィールページ" do
     before do
@@ -50,14 +20,31 @@ RSpec.describe "Users", type: :system do
       it "プロフィール編集ページへのリンクが表示されていることを確認" do
         expect(page).to have_link 'プロフィールを編集', href: edit_user_registration_path
       end
+
+      it "グループ新規作成ページへのリンクが表示されていることを確認" do
+        expect(page).to have_link 'グループ新規作成', href: new_group_path
+      end
+
+      it "投稿一覧ページへのリンクが表示されていることを確認" do
+        group = user.groups.first
+        expect(page).to have_link group.name, href: group_posts_path(group)
+      end
     end
 
     context "サインインユーザーでないユーザープロフィールを表示する時" do
+      let(:other_user) { create(:user, :user_with_groups) }
+
+      before do
+        visit user_path(other_user)
+      end
+
       it "プロフィール編集ページへのリンクが表示されていないことを確認" do
-        logout(:user)
-        login_as(other_user)
-        visit user_path(user)
         expect(page).not_to have_link 'プロフィールを編集', href: edit_user_registration_path
+      end
+
+      it "投稿一覧ページへのリンクが表示されていることを確認" do
+        group = other_user.groups.first
+        expect(page).to have_link group.name, href: group_posts_path(group)
       end
     end
   end

@@ -3,13 +3,15 @@
     <div class="text-center">
       <ul>
         <li>
+          <%= link_to "トップページ", root_path %>
+        <li>
           <%= link_to "Sukkiriについて", about_path %>
         </li>
         <li>
           <%= link_to "利用規約", terms_path %>
         </li>
         <li>
-          Copyright #####
+          <p>&copy; 2016-<%= Time.current.year %>Copyright #####
         </li>
       </ul>
     </div>

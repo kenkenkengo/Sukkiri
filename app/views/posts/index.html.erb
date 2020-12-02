@@ -1,0 +1,8 @@
+<% provide(:title, @group.name) %>
+<div class="wrapper">
+  <h3><%= @group.name %></h3>
+  <% if current_user == @group.admin_user %>
+  <%= link_to "#{@group.name}の編集", edit_group_path(@group) %>
+  <% end %>
+  <%= render "main_post" %>
+</div>

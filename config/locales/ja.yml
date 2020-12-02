@@ -3,6 +3,7 @@ ja:
     attributes:
       group:
         name: "グループ名"
+        admin_user_id: "管理者ID"
     models:
       group: "グループ"
     errors:

@@ -7,6 +7,7 @@
     <div class="form-group">
       <%= f.label "グループメンバー追加", class: "chat-group-form__label" %>
       <%= f.collection_check_boxes :user_ids, User.all, :id, :username %>
+      <p>チェックしたメンバーのみこのグループに入る事ができます</p>
     </div>
   <%= f.hidden_field :admin_user_id, value: current_user.id %>
   <%= f.submit class: 'btn btn-primary' %>

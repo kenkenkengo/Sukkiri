@@ -7,5 +7,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @admin_groups = Group.where(admin_user_id: params[:id])
   end
 end
