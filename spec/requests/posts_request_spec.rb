@@ -2,7 +2,6 @@ RSpec.describe "Posts", type: :request do
   let(:user) { create(:user, :user_with_groups_and_posts) }
   let(:temp_group) { create(:group, admin_user_id: user.id) }
   let(:belonging) { create(:belonging, user: user, group: temp_group) }
-  let(:post_params) { attributes_for(:post, :image, user: user, group: temp_group) }
   let(:invalid_post_params) { attributes_for(:post, user: user, group: temp_group) }
   let(:image_path) { File.join(Rails.root, 'spec/fixtures/test_image.jpg') }
   let(:image) { Rack::Test::UploadedFile.new(image_path) }
@@ -28,7 +27,7 @@ RSpec.describe "Posts", type: :request do
 
   context "グループ入室許可されていないユーザーの場合" do
     let(:other_user) { create(:user) }
-    let(:other_post_params) { attributes_for(:post, :image, user: other_user, group: temp_group) }
+    let(:other_post_params) { attributes_for(:post, :image, user: other_user) }
 
     before do
       login_as(other_user)

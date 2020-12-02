@@ -1,5 +1,5 @@
 RSpec.describe "プロフィール編集", type: :request do
-  let!(:user_params) { attributes_for(:user) }
+  let!(:user_params) { attributes_for(:user, password: nil, password_confirmation: nil) }
   let!(:user) { create(:user) }
 
   context "認可されたユーザーの場合" do
