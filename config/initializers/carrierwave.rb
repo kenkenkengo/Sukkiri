@@ -6,7 +6,7 @@ require 'carrierwave/storage/fog'
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory     =  ENV['AWS_S3_BUCKET']
-    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/sukkiribucket2'
+    config.asset_host = 'https://sukkiribucket2.s3.amazonaws.com'
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
