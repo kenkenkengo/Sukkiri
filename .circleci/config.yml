@@ -43,6 +43,7 @@ jobs:
     working_directory: ~/Sukkiri
     steps:
       - checkout
+      - run: env > ~/.env
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
