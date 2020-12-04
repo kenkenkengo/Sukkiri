@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_011403) do
+ActiveRecord::Schema.define(version: 2020_12_03_144211) do
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_11_30_011403) do
     t.datetime "updated_at", null: false
     t.index ["admin_user_id"], name: "index_groups_on_admin_user_id"
     t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -61,6 +70,8 @@ ActiveRecord::Schema.define(version: 2020_11_30_011403) do
 
   add_foreign_key "belongings", "groups"
   add_foreign_key "belongings", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "users"
 end
