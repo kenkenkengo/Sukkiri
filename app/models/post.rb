@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :group
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   validate :image_size
   validates :image, presence: true
   mount_uploader :image, ImageUploader

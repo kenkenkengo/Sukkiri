@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_144211) do
+ActiveRecord::Schema.define(version: 2020_12_04_162501) do
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2020_12_03_144211) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_belongings_on_group_id"
     t.index ["user_id"], name: "index_belongings_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "comment", null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_12_03_144211) do
 
   add_foreign_key "belongings", "groups"
   add_foreign_key "belongings", "users"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "groups"
