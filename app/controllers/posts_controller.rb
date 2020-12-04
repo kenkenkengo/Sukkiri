@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_group
-  before_action :set_post, only: [:destroy, :edit, :update]
+  before_action :set_post, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!
   before_action :correct_user
   before_action :post_user, only: [:destroy, :edit, :update]
@@ -8,6 +8,9 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = @group.posts.includes(:user).order(id: "DESC")
+  end
+
+  def show
   end
 
   def create

@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-md-2">
       <%= link_to "#{like.post.group.name}", group_posts_path(like.post.group) %>
-      <%= image_tag like.post.image.url %>
+      <%= link_to((image_tag like.post.image.thumb_small.url), group_post_path(like.post.group, like.post), remote: true) %>
+      <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
     <div class="col-md-7">
       <p><%= like.post.content %></p>
