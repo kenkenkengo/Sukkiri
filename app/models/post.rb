@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   def liked_by(user)
-    Like.find_by(user_id: user.id, post_id: self.id)
+    Like.find_by(user_id: user.id, post_id: id)
   end
 
   private
