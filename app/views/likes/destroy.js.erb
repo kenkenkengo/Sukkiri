@@ -1,4 +1,4 @@
 $('#like-icon-post-<%= @post.id.to_s %>').
-  html('<%= link_to image_tag("like-parts.png", size: "30x30"), group_post_likes_path(@post), method: :POST, remote: true %>');
+  html('<%= j render "posts/like_icon", { post: @post, group: @group } %>');
 $('#like-text-post-<%= @post.id.to_s %>').
   html('<%= j render "posts/like_text", { likes: @post.likes } %>');

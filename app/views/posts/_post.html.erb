@@ -5,14 +5,10 @@
   <%= link_to((image_tag post.image.url), group_post_path(group, post), remote: true) %>
   <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <% if current_user == post.user %>
-  <%= link_to "投稿編集", edit_group_post_path(group, post) %>
+    <%= link_to "投稿編集", edit_group_post_path(group, post) %>
   <% end %>
   <div id="like-icon-post-<%= post.id.to_s %>">
-    <% if post.liked_by(current_user).present? %>
-      <%= link_to image_tag("liked-parts.png", size: "30x30"), group_post_like_path(group, post, post.liked_by(current_user)), method: :DELETE, remote: true %>
-    <% else %>
-      <%= link_to image_tag("like-parts.png", size: "30x30"), group_post_likes_path(group, post), method: :POST, remote: true %>
-    <% end %>
+    <%= render "like_icon", { post: post, group: group } %>
   </div>
   <div id="like-text-post-<%= post.id.to_s %>">
     <%= render "like_text", { likes: post.likes } %>
@@ -23,13 +19,6 @@
   <%= time_ago_in_words(post.created_at).upcase + "前" %>
   <hr>
   <div class="row actions" id="comment-form-post-<%= post.id.to_s %>">
-    <%= form_with model: [group, post, Comment.new], class: "w-100" do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :post_id, value: post.id %>
-      <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
-      <div class="actions">
-        <%= f.submit "送信", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+    <%= render 'comment_form', { post: post, group: group } %>
   </div>
 </li>
