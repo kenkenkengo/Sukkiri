@@ -9,7 +9,7 @@
       <ul class="navbar-nav ml-md-auto align-items-center">
         <% if user_signed_in? %>
           <li>
-            <%= link_to "keep一覧", likes_path %>
+            <%= link_to "like一覧", likes_path(current_user) %>
           <li>
             <%= link_to "ユーザー一覧", users_path %>
           </li>

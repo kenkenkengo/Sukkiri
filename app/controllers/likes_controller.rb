@@ -11,6 +11,8 @@ class LikesController < ApplicationController
     @group = @post.group
     if @like.save
       respond_to :js
+    else
+      flash[:alert] = "likeに失敗しました"
     end
   end
 
@@ -20,11 +22,14 @@ class LikesController < ApplicationController
     @group = @post.group
     if @like.destroy
       respond_to :js
+    else
+      flash[:alert] = "likeの削除に失敗しました"
     end
   end
 
   private
-    def like_params
-      params.permit(:post_id)
-    end
+
+  def like_params
+    params.permit(:post_id)
+  end
 end
