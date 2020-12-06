@@ -63,13 +63,6 @@ class PostsController < ApplicationController
     @post = @group.posts.find_by(id: params[:id])
   end
 
-  def correct_user
-    unless current_user.groups.find_by(id: params[:group_id])
-      redirect_to user_path(current_user)
-      flash[:alert] = "入室許可されたグループではありません"
-    end
-  end
-
   def post_user
     unless current_user.posts.find_by(id: params[:id])
       redirect_to user_path(current_user)

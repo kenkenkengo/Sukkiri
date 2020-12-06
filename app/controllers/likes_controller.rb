@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user
 
   def index
     @likes = current_user.likes.includes(:user).order(id: "DESC")
