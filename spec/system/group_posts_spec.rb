@@ -63,7 +63,7 @@ RSpec.describe "投稿一覧", type: :system do
       expect(page).not_to have_link '投稿編集', href: edit_group_post_path(@group, other_post)
     end
 
-    it "keep登録/解除ができること", js: true do
+    it "like登録/解除ができること", js: true do
       link = find('.like')
       expect(link[:href]).to include group_post_likes_path(@group, @post)
       link.click
@@ -74,6 +74,32 @@ RSpec.describe "投稿一覧", type: :system do
       link.click
       link = find('.like')
       expect(link[:href]).to include group_post_likes_path(@group, @post)
+    end
+
+    it "comment投稿/削除ができること", js: true do
+      fill_in "コメント ...", with: "hello world"
+      click_button "送信"
+      within find("#comment-post-#{@post.id}") do
+        expect(page).to have_selector 'span', text: user.username
+        expect(page).to have_selector 'span', text: 'hello world'
+      end
+      link = find('.comment_delete')
+      expect(link[:href]).to include
+      group_post_comment_path(@group, @post, Comment.find_by(user_id: user.id, post_id: @post.id))
+
+      link.click
+      expect(page).not_to have_selector 'span', text: 'hello world'
+    end
+
+    it "別ユーザーの投稿のコメントには削除リンクが無いこと" do
+      user2 = create(:user)
+      create(:belonging, user: user2, group: @group)
+      post = create(:post, :image, user: user2, group: @group)
+      create(:comment, user: user2, post: post)
+      visit group_posts_path(@group)
+      within find("#comment-post-#{post.id}") do
+        expect(page).not_to have_selector 'comment_delete'
+      end
     end
   end
 

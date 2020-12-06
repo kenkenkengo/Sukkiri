@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include GroupsHelper
-  protect_from_forgery with: :null_session
+  protect_from_forgery prepend: true, with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
