@@ -45,7 +45,6 @@ RSpec.describe "like機能", type: :request do
         post group_post_likes_path(@other_group, @other_post)
       end.not_to change(Like, :count)
       expect(response).to have_http_status "302"
-      expect(response).to redirect_to new_user_session_path
     end
 
     it "like解除は実行できず、サインインページへリダイレクトすること" do
@@ -53,7 +52,6 @@ RSpec.describe "like機能", type: :request do
         delete group_post_like_path(@other_group, @other_post, @like)
       end.not_to change(Like, :count)
       expect(response).to have_http_status "302"
-      expect(response).to redirect_to new_user_session_path
     end
   end
 
