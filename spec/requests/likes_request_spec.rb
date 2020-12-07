@@ -56,4 +56,22 @@ RSpec.describe "like機能", type: :request do
       expect(response).to redirect_to new_user_session_path
     end
   end
+
+  context "like一覧ページ" do
+    context "ログインしている場合" do
+      it "レスポンスが正常に表示されること" do
+        login_as(user)
+        get likes_path
+        expect(response).to have_http_status "200"
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "ログイン画面にリダイレクトすること" do
+        get likes_path
+        expect(response).to have_http_status "302"
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

@@ -1,4 +1,5 @@
 RSpec.describe "投稿一覧", type: :system do
+  include CarrierWave::Test::Matchers
   let(:user) { create(:user, :user_with_groups_and_posts) }
   let(:other_user) { create(:user, :other_user_with_groups_and_posts) }
 
@@ -45,6 +46,14 @@ RSpec.describe "投稿一覧", type: :system do
       expect(page).to have_content @post.user.username
       expect(page).to have_content @post.content
       expect(page).to have_selector("img[src$='test_image.jpg']")
+      expect(@post.image.thumb).to be_no_larger_than(600, 600)
+    end
+
+    it "画像をクリックするとモーダルによる画像拡大表示", js: true do
+      page.evaluate_script('$(".modal").modal()')
+      find("#image-modal").click
+      expect(page).to have_selector("img[src$='test_image.jpg']")
+      expect(@post.image).to be_no_larger_than(800, 800)
     end
 
     it "異なるグループの投稿は表示されない" do

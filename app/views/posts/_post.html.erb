@@ -2,7 +2,7 @@
   <%= post.user.username %>
   <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
   <%= post.content if post.content.present? %>
-  <%= link_to((image_tag post.image.url), group_post_path(group, post), remote: true) %>
+  <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
   <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <% if current_user == post.user %>
     <%= link_to "投稿編集", edit_group_post_path(group, post) %>

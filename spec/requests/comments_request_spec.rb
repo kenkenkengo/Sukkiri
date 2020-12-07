@@ -13,7 +13,7 @@ RSpec.describe "コメント機能", type: :request do
 
     it "コメントは実行できず、サインインページへリダイレクトすること" do
       expect do
-        post group_post_likes_path(@group, @post)
+        post group_post_comments_path(@group, @post)
       end.not_to change(Comment, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to new_user_session_path
@@ -21,7 +21,7 @@ RSpec.describe "コメント機能", type: :request do
 
     it "コメント削除は実行できず、サインインページへリダイレクトすること" do
       expect do
-        delete group_post_like_path(@commented_group, @commented_post, @comment)
+        delete group_post_comment_path(@commented_group, @commented_post, @comment)
       end.not_to change(Comment, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to new_user_session_path
@@ -42,7 +42,7 @@ RSpec.describe "コメント機能", type: :request do
 
     it "コメントは実行できず、サインインページへリダイレクトすること" do
       expect do
-        post group_post_likes_path(@other_group, @other_post)
+        post group_post_comments_path(@other_group, @other_post)
       end.not_to change(Comment, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to new_user_session_path
@@ -50,7 +50,7 @@ RSpec.describe "コメント機能", type: :request do
 
     it "コメント削除は実行できず、サインインページへリダイレクトすること" do
       expect do
-        delete group_post_like_path(@other_group, @other_post, @comment)
+        delete group_post_comment_path(@other_group, @other_post, @comment)
       end.not_to change(Comment, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to new_user_session_path
