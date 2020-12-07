@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
   has_many :comments
+  has_many :notifications
+
+  enum notification: { unread: false, read: true }
 
   validates :username, presence: true, length: { maximum: 20 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze

@@ -9,11 +9,17 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.build(like_params)
     @post = @like.post
+    @user = @post.user
     @group = @post.group
     if @like.save
       respond_to :js
     else
       flash[:alert] = "likeに失敗しました"
+    end
+    if @user != current_user
+      @user.notifications.create(post_id: @post.id, action_type: :liked_to_post,
+                                 from_user_id: current_user.id)
+      @user.unread!
     end
   end
 
