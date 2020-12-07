@@ -1,5 +1,4 @@
 RSpec.describe "投稿一覧", type: :system do
-  include CarrierWave::Test::Matchers
   let(:user) { create(:user, :user_with_groups_and_posts) }
   let(:other_user) { create(:user, :other_user_with_groups_and_posts) }
 

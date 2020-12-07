@@ -1,5 +1,4 @@
 RSpec.describe "like一覧", type: :system do
-  include CarrierWave::Test::Matchers
   let(:liked_user) { create(:user, :user_with_groups_and_posts_and_likes) }
 
   before do
