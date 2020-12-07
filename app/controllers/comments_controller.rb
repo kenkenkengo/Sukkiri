@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       @user.notifications.create(post_id: @post.id, action_type: :commented_to_post,
                                  from_user_id: current_user.id,
                                  comment: @comment.comment)
-      @user.unread!
+      @user.update_attribute(:notification, true)
     end
   end
 

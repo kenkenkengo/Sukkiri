@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_073650) do
+ActiveRecord::Schema.define(version: 2020_12_07_102138) do
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_073650) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
-    t.boolean "notification", default: false
+    t.boolean "notification", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

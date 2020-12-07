@@ -19,7 +19,7 @@ class LikesController < ApplicationController
     if @user != current_user
       @user.notifications.create(post_id: @post.id, action_type: :liked_to_post,
                                  from_user_id: current_user.id)
-      @user.unread!
+      @user.update_attribute(:notification, true)
     end
   end
 
