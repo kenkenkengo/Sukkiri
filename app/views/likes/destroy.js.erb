@@ -1,0 +1,4 @@
+$('#like-icon-post-<%= @post.id.to_s %>').
+  html('<%= j render "posts/like_icon", { post: @post, group: @group } %>');
+$('#like-text-post-<%= @post.id.to_s %>').
+  html('<%= j render "posts/like_text", { likes: @post.likes } %>');

@@ -1,6 +1,6 @@
 RSpec.describe "Posts", type: :request do
   let(:user) { create(:user, :user_with_groups_and_posts) }
-  let(:temp_group) { create(:group, admin_user_id: user.id) }
+  let(:temp_group) { attributes_for(:group, admin_user_id: user.id) }
   let(:belonging) { create(:belonging, user: user, group: temp_group) }
   let(:invalid_post_params) { attributes_for(:post, user: user, group: temp_group) }
   let(:image_path) { File.join(Rails.root, 'spec/fixtures/test_image.jpg') }

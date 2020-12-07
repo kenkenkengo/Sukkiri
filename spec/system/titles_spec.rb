@@ -79,5 +79,10 @@ RSpec.describe "タイトル表示", type: :system do
       visit edit_group_path(@group)
       expect(page).to have_title "グループ編集 | Sukkiri"
     end
+
+    it "like一覧ページ" do
+      visit likes_path
+      expect(page).to have_title "like一覧 | Sukkiri"
+    end
   end
 end

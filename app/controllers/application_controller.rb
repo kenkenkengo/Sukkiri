@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include GroupsHelper
   protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -8,6 +9,13 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     new_user_session_path
+  end
+
+  def correct_user
+    unless current_user.groups.find_by(id: params[:group_id])
+      redirect_to user_path(current_user)
+      flash[:alert] = "入室許可されたグループではありません"
+    end
   end
 
   protected

@@ -50,14 +50,9 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def admin_user?
-    @group = Group.find(params[:id])
-    current_user == @group.admin_user
-  end
-
   def admin_user!
     @group = Group.find(params[:id])
-    if !admin_user?
+    if !admin_user?(@group)
       flash[:alert] = "あなたはグループ管理者ではありません"
       redirect_to(root_url)
     end

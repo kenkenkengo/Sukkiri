@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_group
-  before_action :set_post, only: [:destroy, :edit, :update]
+  before_action :set_post, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!
   before_action :correct_user
   before_action :post_user, only: [:destroy, :edit, :update]
@@ -8,6 +8,9 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = @group.posts.includes(:user).order(id: "DESC")
+  end
+
+  def show
   end
 
   def create
@@ -58,13 +61,6 @@ class PostsController < ApplicationController
 
   def set_post
     @post = @group.posts.find_by(id: params[:id])
-  end
-
-  def correct_user
-    unless current_user.groups.find_by(id: params[:group_id])
-      redirect_to user_path(current_user)
-      flash[:alert] = "入室許可されたグループではありません"
-    end
   end
 
   def post_user

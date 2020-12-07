@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get :about, to: 'static_pages#about'
   get :terms, to: 'static_pages#terms'
+  get :likes, to: 'likes#index'
   resources :users, only: [:index, :show]
   resources :groups, only: [:new, :create, :destroy, :edit, :update] do
-    resources :posts, only: [:index, :create, :destroy, :edit, :update]
+    resources :posts, only: [:index, :show, :create, :destroy, :edit, :update] do
+      resources :likes, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
   end
 end

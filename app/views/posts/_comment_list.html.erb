@@ -1,0 +1,13 @@
+<% post.comments.each do |comment| %>
+  <div class="mb-2">
+    <% if comment.user == current_user %>
+      <%= link_to image_tag("delete.png", size: "10x10"), group_post_comment_path(group, post, comment), method: :delete, class: 'comment_delete', remote: true %>
+    <% end %>
+    <span>
+      <strong>
+        <%= link_to comment.user.username, user_path(comment.user), class: "no-text-decoration black-color" %>
+      </strong>
+    </span>
+    <span><%= comment.comment %></span>
+  </div>
+<% end %>

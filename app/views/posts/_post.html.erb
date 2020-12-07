@@ -2,8 +2,23 @@
   <%= post.user.username %>
   <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
   <%= post.content if post.content.present? %>
-  <%= image_tag post.image.url %>
+  <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
+  <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <% if current_user == post.user %>
-  <%= link_to "投稿編集", edit_group_post_path(group, post) %>
+    <%= link_to "投稿編集", edit_group_post_path(group, post) %>
   <% end %>
+  <div id="like-icon-post-<%= post.id.to_s %>">
+    <%= render "like_icon", { post: post, group: group } %>
+  </div>
+  <div id="like-text-post-<%= post.id.to_s %>">
+    <%= render "like_text", { likes: post.likes } %>
+  </div>
+  <div id="comment-post-<%= post.id.to_s %>">
+    <%= render 'comment_list', { post: post, group: group } %>
+  </div>
+  <%= time_ago_in_words(post.created_at).upcase + "前" %>
+  <hr>
+  <div class="row actions" id="comment-form-post-<%= post.id.to_s %>">
+    <%= render 'comment_form', { post: post, group: group } %>
+  </div>
 </li>

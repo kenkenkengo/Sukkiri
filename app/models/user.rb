@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :belongings
   has_many :groups, through: :belongings, dependent: :destroy
   has_many :posts
+  has_many :likes
+  has_many :comments
 
   validates :username, presence: true, length: { maximum: 20 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
