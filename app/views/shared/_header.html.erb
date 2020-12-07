@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <%= link_to "Sukkiri", root_path, id: "logo" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -6,18 +6,30 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-md-auto align-items-center">
+      <ul class="navbar-nav ml-md-auto align-items-center navbar-light bg-light">
         <% if user_signed_in? %>
           <li>
             <%= link_to "like一覧", likes_path(current_user) %>
+          </li>
           <li>
             <%= link_to "ユーザー一覧", users_path %>
           </li>
           <li>
-            <%= link_to "通知一覧", notifications_path %>
+            <%= link_to(notifications_path) do %>
+              <% if current_user.notification == true %>
+                <span class="fa-stack">
+                  <i class="far fa-bell fa-lg bell-icon fa-stack-2x"></i>
+                  <i class="fas fa-circle n-circle fa-stack-1x"></i>
+                </span>
+              <% else %>
+                <i class="far fa-bell fa-lg user-icon"></i>
+              <% end %>
+            <% end %>
           </li>
           <li>
-            <%= link_to image_tag("mypage.png", size: "30x30"), user_path(current_user) %>
+            <%= link_to user_path(current_user) do %>
+              <i class="far fa-user user-icon"></i>
+            <% end %>
           </li>
           <li>
             <%= link_to "サインアウト", destroy_user_session_path, method: :delete %>

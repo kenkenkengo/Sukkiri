@@ -54,6 +54,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -63,6 +64,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -72,6 +74,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -81,6 +84,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -90,6 +94,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -99,6 +104,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -108,6 +114,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -117,6 +124,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -126,6 +134,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -135,6 +144,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -144,6 +154,7 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
@@ -153,6 +164,17 @@ RSpec.describe "ヘッダー表示", type: :system do
       expect(page).to have_link 'Sukkiri', href: root_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
+      expect(page).to have_link '', href: user_path(user)
+      expect(page).to have_link 'サインアウト', href: destroy_user_session_path
+    end
+
+    it "通知一覧" do
+      visit notifications_path
+      expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'like一覧', href: likes_path(user)
+      expect(page).to have_link 'ユーザー一覧', href: users_path
+      expect(page).to have_link '', href: notifications_path
       expect(page).to have_link '', href: user_path(user)
       expect(page).to have_link 'サインアウト', href: destroy_user_session_path
     end
