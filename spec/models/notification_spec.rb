@@ -1,5 +1,4 @@
 RSpec.describe Notification, type: :model do
-
   it "notificationが有効であること" do
     notification = build(:notification)
     expect(notification).to be_valid
