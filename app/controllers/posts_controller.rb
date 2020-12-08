@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user
   before_action :post_user, only: [:destroy, :edit, :update]
+  before_action :set_search
 
   def index
     @post = Post.new
@@ -47,6 +48,17 @@ class PostsController < ApplicationController
       flash.now[:alert] = '入力値が不正です'
       render :edit
     end
+  end
+
+  def set_search
+    if user_signed_in?
+      @search_word = params[:q][:content_cont] if params[:q]
+      @q = @group.posts.ransack(params[:q])
+      @search_results = @q.result(distinct: true).order(created_at: "DESC")
+    end
+  end
+
+  def search
   end
 
   private
