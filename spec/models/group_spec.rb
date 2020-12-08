@@ -30,4 +30,10 @@ RSpec.describe Group, type: :model do
       expect(other_group.errors[:name]).to include("はすでに存在します")
     end
   end
+
+  context "admin_userメソッド" do
+    it "admin_user_idと同じidを持つユーザーを返す" do
+      expect(group.admin_user.id).to eq 1
+    end
+  end
 end

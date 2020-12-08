@@ -60,4 +60,13 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
+  context "downcase_emailメソッド" do
+    let(:user2) { create(:user, email: "EXAmple@exAMple.com") }
+    subject { user2.send(:downcase_email) }
+
+    it "emailの文字列が小文字に変換されること" do
+      expect(subject).to eq "example@example.com"
+    end
+  end
 end
