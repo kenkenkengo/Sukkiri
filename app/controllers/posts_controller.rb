@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user
   before_action :post_user, only: [:destroy, :edit, :update]
-  before_action :set_search, only: [:index, :search]
+  before_action :set_search, only: [:index, :create, :destroy, :search]
 
   def index
     @post = Post.new
@@ -52,6 +52,16 @@ class PostsController < ApplicationController
   def search
   end
 
+  def set_search
+    if user_signed_in?
+      @search_word = params[:q][:content_cont] if params[:q]
+      @q = @group.posts.ransack(params[:q])
+      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
+        page: params[:page], per_page: 5
+      )
+    end
+  end
+
   private
 
   def post_params
@@ -76,16 +86,6 @@ class PostsController < ApplicationController
     unless current_user.posts.find_by(id: params[:id])
       redirect_to user_path(current_user)
       flash[:alert] = "あなたの投稿ではないため許可されていません"
-    end
-  end
-
-  def set_search
-    if user_signed_in?
-      @search_word = params[:q][:content_cont] if params[:q]
-      @q = @group.posts.ransack(params[:q])
-      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
-        page: params[:page], per_page: 5
-      )
     end
   end
 end
