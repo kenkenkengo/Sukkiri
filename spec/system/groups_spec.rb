@@ -1,7 +1,7 @@
 RSpec.describe "グループ新規登録", type: :system do
   let(:user) { create(:user, :user_with_groups) }
 
-  describe "グループ新規登録ページ" do
+  context "グループ新規登録ページ" do
     before do
       login_as(user)
       visit new_group_path
@@ -28,6 +28,26 @@ RSpec.describe "グループ新規登録", type: :system do
       fill_in "グループ名", with: group.name
       click_button "登録する"
       expect(page).to have_content "グループ名はすでに存在します"
+    end
+  end
+
+  context "グループ一覧ページ" do
+    before do
+      login_as(user)
+      @groups = create_list(:group, 6, admin_user_id: user.id)
+      @groups.each do |g|
+        create(:belonging, user: user, group: g)
+      end
+      visit groups_path
+    end
+
+    it "グループ管理者名とグループ名が表示されること" do
+      expect(page).to have_link user.username, href: user_path(user)
+      expect(page).to have_link @groups.first.name, href: group_posts_path(@groups.first)
+    end
+
+    it "ぺージネーションが表示されること" do
+      expect(page).to have_css "div.pagination"
     end
   end
 end

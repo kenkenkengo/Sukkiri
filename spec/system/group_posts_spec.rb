@@ -107,6 +107,12 @@ RSpec.describe "投稿一覧", type: :system do
         expect(page).not_to have_selector 'comment_delete'
       end
     end
+
+    it "ぺージネーションが表示されること" do
+      create_list(:post, 6, :image, user: user, group: @group)
+      visit group_posts_path(@group)
+      expect(page).to have_css "div.pagination"
+    end
   end
 
   context "投稿編集ページ" do

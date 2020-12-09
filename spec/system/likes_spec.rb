@@ -19,4 +19,13 @@ RSpec.describe "like一覧", type: :system do
     find("#image-modal").click
     expect(page).to have_selector("img[src$='test_image.jpg']")
   end
+
+  it "ぺージネーションが表示されること" do
+    posts = create_list(:post, 30, :image, user: liked_user, group: @group)
+    posts.each do |p|
+      create(:like, user: liked_user, post: p)
+    end
+    visit likes_path
+    expect(page).to have_css "div.pagination"
+  end
 end

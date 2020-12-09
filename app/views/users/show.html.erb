@@ -19,7 +19,7 @@
   </li>
 <% end %>
 <% unless @user == current_user %>
-<h3><%= "あなたが入室できるグループ一覧" %></h3>
+<h3><%= "あなたが入室できる#{@user.username}のグループ一覧" %></h3>
 <% @admin_groups.each do |group| %>
   <% if belonging?(group) %>
   <li>

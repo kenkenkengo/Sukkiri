@@ -74,4 +74,25 @@ RSpec.describe "通知機能", type: :system do
       expect(page).not_to have_content @post.content
     end
   end
+
+  context "ページネーション" do
+    let(:user) { create(:user, :user_with_groups) }
+
+    before do
+      @group = user.groups.first
+      @user2 = create(:user)
+      create(:belonging, user: @user2, group: @group)
+      @posts = create_list(:post, 11, :image, user: @user2, group: @group)
+      @posts.each do |p|
+        create(:notification, user: @user2, post_id: p.id,
+                              action_type: "liked_to_post", from_user_id: user.id)
+      end
+      login_as(@user2)
+    end
+
+    it "1ページ10個の表示であること" do
+      visit notifications_path
+      expect(page).to have_css "div.pagination"
+    end
+  end
 end
