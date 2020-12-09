@@ -1,16 +1,14 @@
 class PostsController < ApplicationController
   before_action :set_group
   before_action :set_post, only: [:show, :destroy, :edit, :update]
+  before_action :set_posts, only: [:index, :create, :destroy]
   before_action :authenticate_user!
   before_action :correct_user
   before_action :post_user, only: [:destroy, :edit, :update]
-  before_action :set_search
+  before_action :set_search, only: [:index, :search]
 
   def index
     @post = Post.new
-    @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
-      page: params[:page], per_page: 5
-    )
   end
 
   def show
@@ -22,7 +20,6 @@ class PostsController < ApplicationController
       flash[:notice] = "写真を投稿しました"
       redirect_to group_posts_path(@group)
     else
-      @posts = @group.posts.includes(:user)
       flash.now[:alert] = '写真の選択をしてください'
       render :index
     end
@@ -52,16 +49,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def set_search
-    if user_signed_in?
-      @search_word = params[:q][:content_cont] if params[:q]
-      @q = @group.posts.ransack(params[:q])
-      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
-        page: params[:page], per_page: 5
-      )
-    end
-  end
-
   def search
   end
 
@@ -79,10 +66,26 @@ class PostsController < ApplicationController
     @post = @group.posts.find_by(id: params[:id])
   end
 
+  def set_posts
+    @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
+      page: params[:page], per_page: 5
+    )
+  end
+
   def post_user
     unless current_user.posts.find_by(id: params[:id])
       redirect_to user_path(current_user)
       flash[:alert] = "あなたの投稿ではないため許可されていません"
+    end
+  end
+
+  def set_search
+    if user_signed_in?
+      @search_word = params[:q][:content_cont] if params[:q]
+      @q = @group.posts.ransack(params[:q])
+      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
+        page: params[:page], per_page: 5
+      )
     end
   end
 end

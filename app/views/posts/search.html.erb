@@ -8,5 +8,5 @@
   <ul class="search_results">
     <%= render @search_results, group: @group %>
   </ul>
-  <%= will_paginate @search_results %>
+  <%= will_paginate @search_results, previous_label: '<', next_label: '>' %>
 </div>
