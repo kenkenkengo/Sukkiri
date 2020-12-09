@@ -54,7 +54,7 @@ RSpec.describe "通知機能", type: :system do
       visit group_posts_path(@group)
     end
 
-    it "like登録によって通知が作成されないこと" do
+    it "like登録によって通知が作成されないこと", js: true do
       find('.like').click
       visit group_posts_path(@group)
       expect(page).not_to have_css '.n-circle'
@@ -63,7 +63,7 @@ RSpec.describe "通知機能", type: :system do
       expect(page).not_to have_content @post.content
     end
 
-    it "コメントによって通知が作成されないこと" do
+    it "コメントによって通知が作成されないこと", js: true do
       fill_in "コメント ...", with: "hello world"
       click_button "送信"
       visit group_posts_path(@group)

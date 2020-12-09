@@ -29,14 +29,14 @@ RSpec.describe Notification, type: :model do
   context 'active_userメソッド' do
     it 'notificationが存在する場合、likeやコメントを行なったユーザー(from_user_idと同じidを持つユーザー)を返す' do
       notification = build(:notification)
-      expect(notification.active_user.id).to eq 2
+      expect(notification.active_user).to eq User.find_by(id: 2)
     end
   end
 
   context 'activated_postメソッド' do
     it 'notificationが存在する場合、likeやコメントが行われたpostを返す' do
       notification = build(:notification)
-      expect(notification.activated_post.id).to eq 1
+      expect(notification.activated_post).to eq Post.find_by(id: 1)
     end
   end
 

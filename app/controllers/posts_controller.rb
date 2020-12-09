@@ -55,8 +55,10 @@ class PostsController < ApplicationController
   def set_search
     if user_signed_in?
       @search_word = params[:q][:content_cont] if params[:q]
-      @q = @group.posts.paginate(page: params[:page], per_page: 5).ransack(params[:q])
-      @search_results = @q.result(distinct: true).order(created_at: "DESC")
+      @q = @group.posts.ransack(params[:q])
+      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
+        page: params[:page], per_page: 5
+      )
     end
   end
 

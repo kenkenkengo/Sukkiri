@@ -33,7 +33,7 @@ RSpec.describe Group, type: :model do
 
   context "admin_userメソッド" do
     it "admin_user_idと同じidを持つユーザーを返す" do
-      expect(group.admin_user.id).to eq 1
+      expect(group.admin_user).to eq User.find_by(id: 1)
     end
   end
 end
