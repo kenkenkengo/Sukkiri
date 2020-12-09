@@ -1,0 +1,12 @@
+<% provide(:title, "検索結果") %>
+<div class="container">
+  <% if @search_word.present? %>
+    <h3>”<%= @search_word %>”の検索結果：<%= @search_results.count %>件</h3>
+  <% else %>
+    <h3>投稿一覧</h3>
+  <% end %>
+  <ul class="search_results">
+    <%= render @search_results, group: @group %>
+  </ul>
+  <%= will_paginate @search_results, previous_label: '<', next_label: '>' %>
+</div>

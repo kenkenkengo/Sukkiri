@@ -29,8 +29,17 @@
         background-size: 22px !important;
         background-repeat: no-repeat;
       }
-      .profile-icon {
-        background-image: url("~parts3.png");
+      .bell-icon {
+        font-size: 2em;
+      }
+      .user-icon {
+        font-size: 2em;
+      }
+      .n-circle {
+        position: absolute;
+        padding-left: 1rem;
+        padding-top: 5px;
+        color: gold;
       }
     }
   }

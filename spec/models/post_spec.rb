@@ -23,4 +23,17 @@ RSpec.describe Post, type: :model do
       expect(post).to be_invalid
     end
   end
+
+  context "liked_by(user)メソッド" do
+    let(:user) { create(:user, :user_with_groups_and_posts_and_likes) }
+
+    before do
+      @post = user.posts.first
+      @like = user.likes.first
+    end
+
+    it "post, userに紐づいたlikeインスタンスを返す" do
+      expect(@post.liked_by(user)).to eq @like
+    end
+  end
 end

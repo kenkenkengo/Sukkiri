@@ -5,11 +5,18 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @post = @comment.post
+    @user = @post.user
     @group = @post.group
     if @comment.save
       respond_to :js
     else
       flash[:alert] = "コメントに失敗しました"
+    end
+    if @user != current_user
+      @user.notifications.create(post_id: @post.id, action_type: :commented_to_post,
+                                 from_user_id: current_user.id,
+                                 comment: @comment.comment)
+      @user.update_attribute(:notification, true)
     end
   end
 
