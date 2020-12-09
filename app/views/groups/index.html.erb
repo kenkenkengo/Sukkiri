@@ -1,0 +1,15 @@
+<% provide(:title, "グループ一覧") %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>あなたが入れるグループ一覧 (<%= @groups.count %>)</h3>
+    </div>
+  </div>
+  <% if @groups.present? %>
+    <%= will_paginate %>
+      <ul class="groups">
+        <%= render @groups %>
+      </ul>
+    <%= will_paginate %>
+  <% end %>
+</div>
