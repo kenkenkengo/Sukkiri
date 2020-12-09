@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
-                                                            page: params[:page], per_page: 5)
+      page: params[:page], per_page: 5
+    )
   end
 
   def show
