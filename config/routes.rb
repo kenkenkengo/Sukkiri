@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get :terms, to: 'static_pages#terms'
   get :likes, to: 'likes#index'
   resources :users, only: [:index, :show]
-  resources :groups, only: [:new, :create, :destroy, :edit, :update] do
+  resources :groups, only: [:new, :index, :create, :destroy, :edit, :update] do
     resources :posts, only: [:index, :show, :create, :destroy, :edit, :update] do
       collection do
         get :search

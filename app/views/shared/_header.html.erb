@@ -9,6 +9,9 @@
       <ul class="navbar-nav ml-md-auto align-items-center navbar-light bg-light">
         <% if user_signed_in? %>
           <li>
+            <%= link_to "group一覧", groups_path %>
+          </li>
+          <li>
             <%= link_to "like一覧", likes_path(current_user) %>
           </li>
           <li>

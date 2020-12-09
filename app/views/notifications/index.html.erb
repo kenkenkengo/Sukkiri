@@ -6,8 +6,10 @@
     </div>
   </div>
   <% if @notifications.present? %>
-    <ul class="notifications">
-      <%= render @notifications %>
-    </ul>
+    <%= will_paginate @notifications %>
+      <ul class="notifications">
+        <%= render @notifications %>
+      </ul>
+    <%= will_paginate @notifications %>
   <% end %>
 </div>

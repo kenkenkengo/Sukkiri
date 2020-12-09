@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :correct_user, only: [:create, :destroy]
 
   def index
-    @likes = current_user.likes.includes(:user).order(id: "DESC")
+    @likes = current_user.likes.includes(:user).order(id: "DESC").paginate(page: params[:page])
   end
 
   def create

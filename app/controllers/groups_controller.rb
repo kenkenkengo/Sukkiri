@@ -8,6 +8,10 @@ class GroupsController < ApplicationController
     @group.users << current_user
   end
 
+  def index
+    @groups = current_user.groups.paginate(page: params[:page])
+  end
+
   def create
     @group = Group.new(group_params)
     if @group.save

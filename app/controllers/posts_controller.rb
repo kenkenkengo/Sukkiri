@@ -8,7 +8,8 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = @group.posts.includes(:user).order(id: "DESC")
+    @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
+                                                            page: params[:page], per_page: 5)
   end
 
   def show
@@ -53,7 +54,7 @@ class PostsController < ApplicationController
   def set_search
     if user_signed_in?
       @search_word = params[:q][:content_cont] if params[:q]
-      @q = @group.posts.ransack(params[:q])
+      @q = @group.posts.paginate(page: params[:page], per_page: 5).ransack(params[:q])
       @search_results = @q.result(distinct: true).order(created_at: "DESC")
     end
   end

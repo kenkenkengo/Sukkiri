@@ -25,6 +25,8 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'font-awesome-sass'
 gem 'ransack'
+gem 'will_paginate',           '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

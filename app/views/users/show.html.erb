@@ -18,4 +18,14 @@
     <%= link_to group.name, group_posts_path(group) %>
   </li>
 <% end %>
+<% unless @user == current_user %>
+<h3><%= "あなたが入室できるグループ一覧" %></h3>
+<% @admin_groups.each do |group| %>
+  <% if belonging?(group) %>
+  <li>
+    <%= link_to group.name, group_posts_path(group) %>
+  </li>
+  <% end %>
+<% end %>
+ <% end %>
 
