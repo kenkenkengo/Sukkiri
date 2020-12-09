@@ -6,10 +6,10 @@
     </div>
   </div>
   <% if @likes.present? %>
-    <%= will_paginate %>
+    <%= will_paginate, previous_label: '<', next_label: '>' %>
       <ul class="likes">
         <%= render @likes %>
       </ul>
-    <%= will_paginate %>
+    <%= will_paginate, previous_label: '<', next_label: '>' %>
   <% end %>
 </div>

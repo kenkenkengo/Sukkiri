@@ -6,10 +6,10 @@
     </div>
   </div>
   <% if @groups.present? %>
-    <%= will_paginate %>
+    <%= will_paginate, previous_label: '<', next_label: '>' %>
       <ul class="groups">
         <%= render @groups %>
       </ul>
-    <%= will_paginate %>
+    <%= will_paginate, previous_label: '<', next_label: '>' %>
   <% end %>
 </div>

@@ -1,0 +1,23 @@
+.pagination {
+  height: 40px;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  a {
+    background-color: grey;
+    text-decoration: none;
+    &:hover {
+      background: #93c9ff;
+    }
+  }
+  * {
+    color: white;
+    margin: 0 2px;
+    text-decoration: none;
+    padding: 5px;
+    font-family: "Nunito", sans-serif;
+  }
+  .active a {
+    background-color: #93c9ff;
+  }
+}
