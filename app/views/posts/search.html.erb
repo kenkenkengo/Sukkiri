@@ -1,10 +1,12 @@
 <% provide(:title, "検索結果") %>
 <div class="container">
+<%= link_to "投稿一覧へ戻る", group_posts_path(@group) %>
   <% if @search_word.present? %>
     <h3>”<%= @search_word %>”の検索結果：<%= @search_results.count %>件</h3>
   <% else %>
     <h3>投稿一覧</h3>
   <% end %>
+  <%= sort_link(@q, :deadline) %>
   <ul class="search_results">
     <%= render @search_results, group: @group %>
   </ul>
