@@ -14,20 +14,27 @@ RSpec.describe "投稿一覧", type: :system do
     end
 
     it "有効な情報であれば投稿に成功する" do
-      fill_in "写真名を入力", with: "書類"
+      fill_in "写真名", with: "書類"
+      fill_in "メモ", with: "サンプル"
+      page.find('#post_deadline').set("2021-02-01")
       attach_file "post[image]", "#{Rails.root}/spec/fixtures/test_image.jpg"
       click_button "登録する"
       expect(page).to have_content "写真を投稿しました"
+
     end
 
     it "写真名無しの場合でも投稿に成功する" do
+      fill_in "メモ", with: "サンプル"
+      page.find('#post_deadline').set("2021-02-01")
       attach_file "post[image]", "#{Rails.root}/spec/fixtures/test_image.jpg"
       click_button "登録する"
       expect(page).to have_content "写真を投稿しました"
     end
 
     it "画像無しで登録すると投稿に失敗する" do
-      fill_in "写真名を入力", with: "書類"
+      fill_in "写真名", with: "書類"
+      fill_in "メモ", with: "サンプル"
+      page.find('#post_deadline').set("2021-02-01")
       click_button "登録する"
       expect(page).to have_content "写真の選択をしてください"
     end
@@ -44,6 +51,8 @@ RSpec.describe "投稿一覧", type: :system do
     it "投稿者名、写真名、画像が存在する" do
       expect(page).to have_content @post.user.username
       expect(page).to have_content @post.content
+      expect(page).to have_content @post.deadline.strftime("%Y年%m月%d日")
+      expect(page).to have_content @post.note
       expect(page).to have_selector("img[src$='test_image.jpg']")
     end
 
@@ -124,7 +133,9 @@ RSpec.describe "投稿一覧", type: :system do
     end
 
     it "パラメータ入力すれば更新成功する" do
-      fill_in "写真名を入力", with: "書類"
+      fill_in "写真名", with: "書類"
+      fill_in "メモ", with: "サンプル"
+      page.find('#post_deadline').set("2021-02-01")
       attach_file "post[image]", "#{Rails.root}/spec/fixtures/test_image2.jpg"
       click_button "更新する"
       expect(page).to have_content "投稿を更新しました"
@@ -139,6 +150,56 @@ RSpec.describe "投稿一覧", type: :system do
     it "「投稿削除」「投稿一覧へ戻る」のリンクが存在する" do
       expect(page).to have_link '投稿削除', href: group_post_path(@group, @post)
       expect(page).to have_link '投稿一覧へ戻る', href: group_posts_path(@group)
+    end
+  end
+
+  context "検索機能" do
+    before do
+      login_as(user)
+      @group = user.groups.first
+      create(:post, :image, content: "食品スーパーチラシ", user: user, group: @group)
+      create(:post, :image, content: "家電チラシ", user: user, group: @group)
+      create(:post, :image, content: "申込書", user: user, group: @group)
+    end
+
+    it "検索フォームが表示されていること" do
+      visit group_posts_path(@group)
+      expect(page).to have_selector 'form#post_search'
+    end
+
+    it "検索ワードに該当する結果が表示されること" do
+      visit group_posts_path(@group)
+      fill_in 'q_content_cont', with: 'チラシ'
+      click_button '検索'
+      expect(page).to have_content "”チラシ”の検索結果：2件"
+      within find('.search_results') do
+        expect(page).to have_selector 'li', count: 2
+      end
+      visit group_posts_path(@group)
+      fill_in 'q_content_cont', with: '申込書'
+      click_button '検索'
+      expect(page).to have_content "”申込書”の検索結果：1件"
+      within find('.search_results') do
+        expect(page).to have_selector 'li', count: 1
+      end
+    end
+
+    it "検索ワードを入れずに検索ボタンを押した場合、投稿一覧が表示されること" do
+      visit group_posts_path(@group)
+      click_button '検索'
+      expect(page).to have_content "投稿一覧"
+      within find('.search_results') do
+        expect(page).to have_selector 'li', count: @group.posts.count
+      end
+    end
+
+    it "検索結果のページネーション" do
+      create_list(:post, 5, :image, content: "申込書", user: user, group: @group)
+      visit group_posts_path(@group)
+      fill_in 'q_content_cont', with: '申込書'
+      click_button '検索'
+      expect(page).to have_content "”申込書”の検索結果：6件"
+      expect(page).to have_css "div.pagination"
     end
   end
 end
