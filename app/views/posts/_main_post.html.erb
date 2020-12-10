@@ -2,7 +2,7 @@
   <%= form_for [@group, @post] do |f| %>
   <div class="form-group">
     <%= f.label :写真名 %>
-    <%= f.text_field :content, class: 'form-control', placeholder: '写真名を入力' %>
+    <%= f.text_field :content, class: 'form-control', placeholder: '写真名' %>
   </div>
   <div class="form-group">
     <%= f.label :image, class: 'form__mask__image' do %>
@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
     <%= f.label :メモ %>
-    <%= f.text_field :note, class: 'form-control', placeholder: 'メモを入力' %>
+    <%= f.text_field :note, class: 'form-control', placeholder: 'メモ' %>
   </div>
   <div class="form-group">
     <%= f.label :期限 %>
@@ -22,6 +22,18 @@
   </div>
   <% end %>
 </div>
+<div class="sort">
+  <p>並べ替え:
+    <%= link_to "期限⬆️", sort: "deadline" %>
+    <%= link_to "投稿日⬇️", sort: "id desc" %>
+    <%= link_to "更新日⬇️", sort: "updated_at desc" %>
+    <% unless request.fullpath.include?('content+desc') %>
+      <%= link_to "写真名⬆️", sort: "content desc" %>
+    <% else %>
+      <%= link_to "写真名⬇️", sort: "content" %>
+    <% end %>
+  </p>
+<%= render 'shared/search' %>
 <div class="posts">
   <%= render @posts, group: @group %>
 </div>

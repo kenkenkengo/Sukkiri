@@ -77,9 +77,15 @@ class PostsController < ApplicationController
   end
 
   def set_posts
-    @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
-      page: params[:page], per_page: 5
-    )
+    if request.fullpath.include?('sort')
+      @posts = @group.posts.includes(:user).order(params[:sort]).paginate(
+        page: params[:page], per_page: 5
+      )
+    else
+      @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
+        page: params[:page], per_page: 5
+      )
+    end
   end
 
   def post_user

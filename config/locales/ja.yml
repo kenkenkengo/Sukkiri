@@ -4,8 +4,16 @@ ja:
       group:
         name: "グループ名"
         admin_user_id: "管理者ID"
+      post:
+        content: "写真名"
+        image: "写真"
+        created_at: "投稿日"
+        updated_at: "更新日"
+        deadline: "期限"
+        note: "メモ"
     models:
       group: "グループ"
+      post: "投稿"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
