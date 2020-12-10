@@ -20,7 +20,6 @@ RSpec.describe "投稿一覧", type: :system do
       attach_file "post[image]", "#{Rails.root}/spec/fixtures/test_image.jpg"
       click_button "登録する"
       expect(page).to have_content "写真を投稿しました"
-
     end
 
     it "写真名無しの場合でも投稿に成功する" do

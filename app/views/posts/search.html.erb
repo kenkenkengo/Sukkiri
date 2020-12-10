@@ -6,12 +6,9 @@
   <% else %>
     <h3>投稿一覧</h3>
   <% end %>
-  <p>並べ替え:
-    <%= sort_link(@q, :deadline) %>
-    <%= sort_link(@q, :created_at) %>
-    <%= sort_link(@q, :updated_at) %>
-    <%= sort_link(@q, :content) %>
-  </p>
+  <div class="sort">
+    <%= render 'sort_search.html.erb' %>
+  </div>
   <ul class="search_results">
     <%= render @search_results, group: @group %>
   </ul>

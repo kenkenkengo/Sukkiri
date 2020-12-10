@@ -1,0 +1,10 @@
+<p>並べ替え:
+  <%= link_to "期限⬆️", sort: "deadline" %>
+  <%= link_to "投稿日⬇️", sort: "id desc" %>
+  <%= link_to "更新日⬇️", sort: "updated_at desc" %>
+  <% unless request.fullpath.include?('content+desc') %>
+  <%= link_to "写真名⬆️", sort: "content desc" %>
+  <% else %>
+  <%= link_to "写真名⬇️", sort: "content" %>
+  <% end %>
+</p>
