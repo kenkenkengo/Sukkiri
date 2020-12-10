@@ -84,5 +84,20 @@ RSpec.describe "タイトル表示", type: :system do
       visit likes_path
       expect(page).to have_title "like一覧 | Sukkiri"
     end
+
+    it "通知一覧ページ" do
+      visit notifications_path
+      expect(page).to have_title "通知一覧 | Sukkiri"
+    end
+
+    it "グループ一覧ページ" do
+      visit groups_path
+      expect(page).to have_title "グループ一覧 | Sukkiri"
+    end
+
+    it "検索結果ページ" do
+      visit search_group_posts_path(@group)
+      expect(page).to have_title "検索結果 | Sukkiri"
+    end
   end
 end

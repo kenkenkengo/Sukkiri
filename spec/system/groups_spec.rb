@@ -11,23 +11,41 @@ RSpec.describe "グループ新規登録", type: :system do
       expect(page).to have_content 'グループ新規登録'
     end
 
-    it "有効なグループの作成成功フラッシュ表示" do
-      fill_in "グループ名", with: "example group"
-      click_button "登録する"
-      expect(page).to have_content "グループを作成しました"
+    context "新規登録が成功する時" do
+      let!(:other_user) { create(:user) }
+
+      it "有効なグループの作成成功フラッシュ表示" do
+        fill_in "グループ名", with: "example group"
+        click_button "登録する"
+        expect(page).to have_content "グループを作成しました"
+      end
+
+      it "チェックボックスでチェックをつけられたユーザーのみグループに入室許可を与える" do
+        visit new_group_path
+        fill_in "グループ名", with: "example group"
+        check other_user.username
+        expect(page).to have_checked_field(other_user.username)
+        click_button "登録する"
+        visit user_path(other_user)
+        within ".user_belonging" do
+          expect(page).to have_link "example group", href: group_posts_path(user.groups.second)
+        end
+      end
     end
 
-    it "グループ名が空の場合の作成失敗表示" do
-      fill_in "グループ名", with: ""
-      click_button "登録する"
-      expect(page).to have_content "グループ名を入力してください"
-    end
+    context "新規登録が失敗する時" do
+      it "グループ名が空の場合の作成失敗表示" do
+        fill_in "グループ名", with: ""
+        click_button "登録する"
+        expect(page).to have_content "グループ名を入力してください"
+      end
 
-    it "既に存在するグループ名でグループ作成する場合の失敗表示" do
-      group = user.groups.first
-      fill_in "グループ名", with: group.name
-      click_button "登録する"
-      expect(page).to have_content "グループ名はすでに存在します"
+      it "既に存在するグループ名でグループ作成する場合の失敗表示" do
+        group = user.groups.first
+        fill_in "グループ名", with: group.name
+        click_button "登録する"
+        expect(page).to have_content "グループ名はすでに存在します"
+      end
     end
   end
 
