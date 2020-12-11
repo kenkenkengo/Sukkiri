@@ -1,10 +1,22 @@
 <p>並べ替え:
-  <%= link_to "期限⬆️", sort: "deadline" %>
-  <%= link_to "投稿日⬇️", sort: "id desc" %>
-  <%= link_to "更新日⬇️", sort: "updated_at desc" %>
-  <% unless request.fullpath.include?('content+desc') %>
-  <%= link_to "写真名⬆️", sort: "content desc" %>
+  <% if request.fullpath.include?('deadline+asc') %>
+    <%= link_to "期限", sort: "deadline desc" %>
   <% else %>
-  <%= link_to "写真名⬇️", sort: "content" %>
+    <%= link_to "期限", sort: "deadline asc" %>
+  <% end %>
+  <% if request.fullpath.include?('id+asc') %>
+    <%= link_to "投稿日", sort: "id desc" %>
+  <% else %>
+    <%= link_to "投稿日", sort: "id asc" %>
+  <% end %>
+  <% if request.fullpath.include?('updated_at+asc') %>
+    <%= link_to "更新日", sort: "updated_at desc" %>
+  <% else %>
+    <%= link_to "更新日", sort: "updated_at asc" %>
+  <% end %>
+  <% if request.fullpath.include?('content+asc') %>
+    <%= link_to "写真名", sort: "content desc" %>
+  <% else %>
+    <%= link_to "写真名", sort: "content asc" %>
   <% end %>
 </p>

@@ -1,4 +1,5 @@
 <li>
+  <div id="post-<%= post.id.to_s %>">
   <%= post.user.username %>
   <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
   <%= post.content if post.content.present? %>
@@ -9,6 +10,7 @@
   <% if current_user == post.user %>
     <%= link_to "投稿編集", edit_group_post_path(group, post) %>
   <% end %>
+  </div>
   <div id="like-icon-post-<%= post.id.to_s %>">
     <%= render "like_icon", { post: post, group: group } %>
   </div>
