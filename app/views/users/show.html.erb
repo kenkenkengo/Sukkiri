@@ -12,20 +12,23 @@
     <%= link_to group.name, group_posts_path(group) %>
   </li>
 <% end %>
-<h3><%= "#{@user.username}が入室できるグループ一覧" %></h3>
-<% @user.groups.each do |group| %>
-  <li>
-    <%= link_to group.name, group_posts_path(group) %>
-  </li>
-<% end %>
-<% unless @user == current_user %>
-<h3><%= "あなたが入室できるグループ一覧" %></h3>
-<% @admin_groups.each do |group| %>
-  <% if belonging?(group) %>
-  <li>
-    <%= link_to group.name, group_posts_path(group) %>
-  </li>
+<div class="user_belonging">
+  <h3><%= "#{@user.username}が入室できるグループ一覧" %></h3>
+  <% @user.groups.each do |group| %>
+    <li>
+      <%= link_to group.name, group_posts_path(group) %>
+    </li>
   <% end %>
-<% end %>
- <% end %>
-
+</div>
+<div class="current_user_belonging">
+  <% unless @user == current_user %>
+    <h3><%= "あなたが入室できる#{@user.username}のグループ一覧" %></h3>
+    <% @admin_groups.each do |group| %>
+      <% if belonging?(group) %>
+        <li>
+          <%= link_to group.name, group_posts_path(group) %>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

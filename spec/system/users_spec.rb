@@ -25,9 +25,11 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_link 'グループ新規作成', href: new_group_path
       end
 
-      it "投稿一覧ページへのリンクが表示されていることを確認" do
+      it "プロフィールユーザーが入室できるグループへのリンクが表示されていることを確認" do
         group = user.groups.first
-        expect(page).to have_link group.name, href: group_posts_path(group)
+        within ".user_belonging" do
+          expect(page).to have_link group.name, href: group_posts_path(group)
+        end
       end
     end
 
@@ -35,6 +37,10 @@ RSpec.describe "Users", type: :system do
       let(:other_user) { create(:user, :user_with_groups) }
 
       before do
+        @group = other_user.groups.first
+        @group2 = create(:group, admin_user_id: other_user.id)
+        create(:belonging, user: user, group: @group2)
+        create(:belonging, user: other_user, group: @group2)
         visit user_path(other_user)
       end
 
@@ -42,9 +48,18 @@ RSpec.describe "Users", type: :system do
         expect(page).not_to have_link 'プロフィールを編集', href: edit_user_registration_path
       end
 
-      it "投稿一覧ページへのリンクが表示されていることを確認" do
-        group = other_user.groups.first
-        expect(page).to have_link group.name, href: group_posts_path(group)
+      it "プロフィールユーザーが入室できるグループへのリンクが表示されていることを確認" do
+        within ".user_belonging" do
+          expect(page).to have_link @group.name, href: group_posts_path(@group)
+          expect(page).to have_link @group2.name, href: group_posts_path(@group2)
+        end
+      end
+
+      it "サインインユーザーが入室できるグループへのリンクのみ表示されていることを確認" do
+        within ".current_user_belonging" do
+          expect(page).not_to have_link @group.name, href: group_posts_path(@group)
+          expect(page).to have_link @group2.name, href: group_posts_path(@group2)
+        end
       end
     end
   end

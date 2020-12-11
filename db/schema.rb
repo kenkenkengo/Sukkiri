@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_102138) do
+ActiveRecord::Schema.define(version: 2020_12_10_013223) do
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
@@ -67,6 +67,9 @@ ActiveRecord::Schema.define(version: 2020_12_07_102138) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deadline"
+    t.text "note"
+    t.index ["deadline"], name: "index_posts_on_deadline"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

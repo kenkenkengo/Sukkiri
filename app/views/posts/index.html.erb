@@ -1,10 +1,9 @@
 <% provide(:title, @group.name) %>
 <div class="wrapper">
-  <%= render 'shared/search' %>
   <h3><%= @group.name %></h3>
   <% if current_user == @group.admin_user %>
   <%= link_to "#{@group.name}の編集", edit_group_path(@group) %>
   <% end %>
-  <%= render "main_post" %>
+  <%= render "main_post", group: @group, post: @post %>
   <%= will_paginate @posts, previous_label: '<', next_label: '>' %>
 </div>

@@ -1,13 +1,8 @@
-<div class="form">
-  <%= form_for [@group, @post] do |f| %>
-  <%= f.label :写真名 %>
-  <%= f.text_field :content, class: 'form__message', placeholder: '写真名を入力' %>
-  <%= f.label :image, class: 'form__mask__image' do %>
-  <%= f.file_field :image, class: 'hidden' %>
-  <% end %>
-  <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+<%= render 'post_form', group: group, post: post %>
+<div class="sort">
+  <%= render 'sort_main_post.html.erb' %>
 </div>
+<%= render 'search_form' %>
 <div class="posts">
-  <%= render @posts, group: @group %>
+  <%= render @posts, group: group %>
 </div>

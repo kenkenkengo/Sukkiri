@@ -1,12 +1,16 @@
 <li>
+  <div id="post-<%= post.id.to_s %>">
   <%= post.user.username %>
   <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
   <%= post.content if post.content.present? %>
+  <%= post.deadline.strftime("%Y年%m月%d日") if post.deadline.present? %>
+  <%= post.note if post.note.present? %>
   <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
   <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <% if current_user == post.user %>
     <%= link_to "投稿編集", edit_group_post_path(group, post) %>
   <% end %>
+  </div>
   <div id="like-icon-post-<%= post.id.to_s %>">
     <%= render "like_icon", { post: post, group: group } %>
   </div>

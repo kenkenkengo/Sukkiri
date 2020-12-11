@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       @search_word = params[:q][:content_cont] if params[:q]
       @q = @group.posts.ransack(params[:q])
-      @search_results = @q.result(distinct: true).order(created_at: "DESC").paginate(
+      @search_results = @q.result(distinct: true).sort_desc.paginate(
         page: params[:page], per_page: 5
       )
     end
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :image).merge(user_id: current_user.id)
+    params.require(:post).permit(:content, :image, :note, :deadline).merge(user_id: current_user.id)
   end
 
   def set_group
@@ -77,9 +77,15 @@ class PostsController < ApplicationController
   end
 
   def set_posts
-    @posts = @group.posts.includes(:user).order(id: "DESC").paginate(
-      page: params[:page], per_page: 5
-    )
+    if request.fullpath.include?('sort')
+      @posts = @group.posts.includes(:user).order(params[:sort]).paginate(
+        page: params[:page], per_page: 5
+      )
+    else
+      @posts = @group.posts.includes(:user).sort_desc.paginate(
+        page: params[:page], per_page: 5
+      )
+    end
   end
 
   def post_user
