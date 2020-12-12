@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       flash[:notice] = "写真を投稿しました"
       redirect_to group_posts_path(@group)
     else
-      flash.now[:alert] = '写真の選択をしてください'
+      flash.now[:alert] = '写真名の入力あるいは写真の選択をしてください'
       render :index
     end
   end
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       flash[:notice] = "投稿を更新しました"
       redirect_to group_posts_path(@group)
     else
-      flash.now[:alert] = '入力値が不正です'
+      flash.now[:alert] = '写真名の入力をしてください'
       render :edit
     end
   end

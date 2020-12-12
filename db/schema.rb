@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_013223) do
+ActiveRecord::Schema.define(version: 2020_12_12_021911) do
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_013223) do
   end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "content"
+    t.string "content", null: false
     t.string "image", null: false
     t.bigint "group_id"
     t.bigint "user_id"

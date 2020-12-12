@@ -23,20 +23,12 @@ RSpec.describe "投稿一覧", type: :system do
         expect(page).to have_content "写真を投稿しました"
       end
 
-      it "写真名無しの場合でも投稿に成功する" do
-        fill_in "メモ", with: "サンプル"
-        page.find('#post_deadline').set("2021-02-01")
-        attach_file "post[image]", "#{Rails.root}/spec/fixtures/test_image.jpg"
-        click_button "登録する"
-        expect(page).to have_content "写真を投稿しました"
-      end
-
       it "画像無しで登録すると投稿に失敗する" do
         fill_in "写真名", with: "書類"
         fill_in "メモ", with: "サンプル"
         page.find('#post_deadline').set("2021-02-01")
         click_button "登録する"
-        expect(page).to have_content "写真の選択をしてください"
+        expect(page).to have_content "写真名の入力あるいは写真の選択をしてください"
       end
     end
 
@@ -147,6 +139,12 @@ RSpec.describe "投稿一覧", type: :system do
         expect(@post.reload.image.url).to include "test_image.jpg"
       end
 
+      it "写真名の入力をしない場合、更新に失敗する" do
+        fill_in "写真名", with: ""
+        click_button "更新する"
+        expect(page).to have_content "写真名の入力をしてください"
+      end
+
       it "「投稿削除」「投稿一覧へ戻る」のリンクが存在する" do
         expect(page).to have_link '投稿削除', href: group_post_path(@group, @post)
         expect(page).to have_link '投稿一覧へ戻る', href: group_posts_path(@group)
@@ -211,15 +209,15 @@ context "投稿並べ替え" do
   before do
     login_as(user)
     @group = user.groups.first
-    @post1 = create(:post, :image, content: "もうしこみしょ", user: user, group: @group,
+    @post1 = create(:post, :image, content: "申込書", user: user, group: @group,
                                    deadline: "2021/1/1",
                                    created_at: "2021/1/1",
                                    updated_at: "2021/1/3")
-    @post2 = create(:post, :image, content: "かでん", user: user, group: @group,
+    @post2 = create(:post, :image, content: "家電", user: user, group: @group,
                                    deadline: "2021/1/2",
                                    created_at: "2021/1/2",
                                    updated_at: "2021/1/2")
-    @post3 = create(:post, :image, content: "しょくひん", user: user, group: @group,
+    @post3 = create(:post, :image, content: "食品", user: user, group: @group,
                                    deadline: "2021/1/3",
                                    created_at: "2021/1/3",
                                    updated_at: "2021/1/1")
@@ -233,37 +231,26 @@ context "投稿並べ替え" do
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
     end
 
-    it "「投稿日」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
-      click_link "投稿日"
+    it "「投稿日時」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
+      click_link "投稿日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post3.content)
-      click_link "投稿日"
+      click_link "投稿日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post3.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
     end
 
-    it "「更新日」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
-      click_link "更新日"
+    it "「更新日時」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
+      click_link "更新日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post3.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
-      click_link "更新日"
+      click_link "更新日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post3.content)
-    end
-
-    it "「写真名」リンクをクリックすると写真名の昇順と降順に並び替えられること" do
-      click_link "写真名"
-      expect(page).to have_selector("li:nth-child(1)", text: @post2.content)
-      expect(page).to have_selector("li:nth-child(2)", text: @post3.content)
-      expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
-      click_link "写真名"
-      expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
-      expect(page).to have_selector("li:nth-child(2)", text: @post3.content)
-      expect(page).to have_selector("li:nth-child(3)", text: @post2.content)
     end
 
     it "「期限」リンクをクリックすると期限の昇順と降順に並び替えられること" do
@@ -289,37 +276,26 @@ context "投稿並べ替え" do
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
     end
 
-    it "「投稿日」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
-      click_link "投稿日"
+    it "「投稿日時」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
+      click_link "投稿日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post3.content)
-      click_link "投稿日"
+      click_link "投稿日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post3.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
     end
 
-    it "「更新日」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
-      click_link "更新日"
+    it "「更新日時」リンクをクリックすると投稿日の昇順と降順に並び替えられること" do
+      click_link "更新日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post3.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
-      click_link "更新日"
+      click_link "更新日時"
       expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
       expect(page).to have_selector("li:nth-child(2)", text: @post2.content)
       expect(page).to have_selector("li:nth-child(3)", text: @post3.content)
-    end
-
-    it "「写真名」リンクをクリックすると写真名の昇順と降順に並び替えられること" do
-      click_link "写真名"
-      expect(page).to have_selector("li:nth-child(1)", text: @post2.content)
-      expect(page).to have_selector("li:nth-child(2)", text: @post3.content)
-      expect(page).to have_selector("li:nth-child(3)", text: @post1.content)
-      click_link "写真名"
-      expect(page).to have_selector("li:nth-child(1)", text: @post1.content)
-      expect(page).to have_selector("li:nth-child(2)", text: @post3.content)
-      expect(page).to have_selector("li:nth-child(3)", text: @post2.content)
     end
 
     it "「期限」リンクをクリックすると期限の昇順と降順に並び替えられること" do

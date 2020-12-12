@@ -7,8 +7,8 @@ ja:
       post:
         content: "写真名"
         image: "写真"
-        created_at: "投稿日"
-        updated_at: "更新日"
+        created_at: "投稿日時"
+        updated_at: "更新日時"
         deadline: "期限"
         note: "メモ"
     models:
