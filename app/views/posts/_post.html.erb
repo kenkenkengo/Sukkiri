@@ -2,8 +2,18 @@
   <div id="post-<%= post.id.to_s %>">
   <%= post.user.username %>
   <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
-  <%= post.content if post.content.present? %>
-  <%= post.deadline.strftime("%Y年%m月%d日") if post.deadline.present? %>
+  <%= post.content %>
+  <% if post.deadline.present? %>
+    <% if post.deadline <= Time.current %>
+      <div class="expirs">
+    <% elsif post.deadline - Time.current <= 7.days %>
+      <div class="approaching">
+    <% else %>
+      <div class="still">
+    <% end %>
+    <%= post.deadline.strftime("%Y年%m月%d日") %>
+    </div>
+  <% end %>
   <%= post.note if post.note.present? %>
   <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
   <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

@@ -48,6 +48,22 @@ RSpec.describe "投稿一覧", type: :system do
         expect(page).to have_selector("img[src$='test_image.jpg']")
       end
 
+      it "期限まで７日以上開いていれば期限が青文字で表示される" do
+        expect(page).to have_selector '.still', text: '2021年02月01日'
+      end
+
+      it "期限まで７日以内であれば期限が黄文字で表示される" do
+        travel_to Time.new(2021, 1, 26)
+        visit group_posts_path(@group)
+        expect(page).to have_selector '.approaching', text: '2021年02月01日'
+      end
+
+      it "期限を過ぎていれば期限が赤文字で表示される" do
+        travel_to Time.new(2021, 2, 2)
+        visit group_posts_path(@group)
+        expect(page).to have_selector '.expirs', text: '2021年02月01日'
+      end
+
       it "画像をクリックするとモーダルによる画像拡大表示", js: true do
         page.evaluate_script('$(".modal").modal()')
         find("#image-modal").click
@@ -158,15 +174,14 @@ RSpec.describe "投稿一覧", type: :system do
         create(:post, :image, content: "食品スーパーチラシ", user: user, group: @group)
         create(:post, :image, content: "家電チラシ", user: user, group: @group)
         create(:post, :image, content: "申込書", user: user, group: @group)
+        visit group_posts_path(@group)
       end
 
       it "検索フォームが表示されていること" do
-        visit group_posts_path(@group)
         expect(page).to have_selector 'form#post_search'
       end
 
       it "検索ワードに該当する結果が表示されること" do
-        visit group_posts_path(@group)
         fill_in 'q_content_cont', with: 'チラシ'
         click_button '検索'
         expect(page).to have_content "”チラシ”の検索結果：2件"
@@ -183,12 +198,31 @@ RSpec.describe "投稿一覧", type: :system do
       end
 
       it "検索ワードを入れずに検索ボタンを押した場合、投稿一覧が表示されること" do
-        visit group_posts_path(@group)
         click_button '検索'
         expect(page).to have_content "投稿一覧"
         within find('.search_results') do
           expect(page).to have_selector 'li', count: @group.posts.count
         end
+      end
+
+      it "期限まで７日以上開いていれば期限が青文字で表示される" do
+        fill_in 'q_content_cont', with: '申込書'
+        click_button '検索'
+        expect(page).to have_selector '.still', text: '2021年02月01日'
+      end
+
+      it "期限まで７日以内であれば期限が黄文字で表示される" do
+        travel_to Time.new(2021, 1, 26)
+        fill_in 'q_content_cont', with: '申込書'
+        click_button '検索'
+        expect(page).to have_selector '.approaching', text: '2021年02月01日'
+      end
+
+      it "期限を過ぎていれば期限が赤文字で表示される" do
+        travel_to Time.new(2021, 2, 2)
+        fill_in 'q_content_cont', with: '申込書'
+        click_button '検索'
+        expect(page).to have_selector '.expirs', text: '2021年02月01日'
       end
 
       it "検索結果のページネーション" do
