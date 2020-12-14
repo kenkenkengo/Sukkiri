@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-md-auto align-items-center navbar-light bg-light">
         <% if user_signed_in? %>
-          <li>
-            <%= link_to "group一覧", groups_path %>
+          <li class="nav-item">
+            <%= link_to "グループ一覧", groups_path %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to "like一覧", likes_path(current_user) %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to "ユーザー一覧", users_path %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to(notifications_path) do %>
               <% if current_user.notification == true %>
                 <span class="fa-stack">
@@ -25,16 +25,16 @@
                   <i class="fas fa-circle n-circle fa-stack-1x"></i>
                 </span>
               <% else %>
-                <i class="far fa-bell fa-lg user-icon"></i>
+                <i class="far fa-bell fa-lg bell-icon"></i>
               <% end %>
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to user_path(current_user) do %>
               <i class="far fa-user user-icon"></i>
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to "サインアウト", destroy_user_session_path, method: :delete %>
           </li>
         <% end %>

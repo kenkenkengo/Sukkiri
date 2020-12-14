@@ -18,11 +18,11 @@ RSpec.describe "通知機能", type: :system do
       click_link "サインアウト"
       fill_in "user_email", with: @user2.email
       fill_in "user_password", with: @user2.password
-      click_button "サインイン"
+      click_button "サインインする"
       expect(page).to have_css '.n-circle'
       visit notifications_path
       expect(page).not_to have_css '.n-circle'
-      expect(page).to have_content "あなたの投稿が #{user.username} さんにlike登録されました。"
+      expect(page).to have_content "like登録されました。"
       expect(page).to have_content @post2.content
     end
 
@@ -34,11 +34,11 @@ RSpec.describe "通知機能", type: :system do
       click_link "サインアウト"
       fill_in "user_email", with: @user2.email
       fill_in "user_password", with: @user2.password
-      click_button "サインイン"
+      click_button "サインインする"
       expect(page).to have_css '.n-circle'
       visit notifications_path
       expect(page).not_to have_css '.n-circle'
-      expect(page).to have_content "あなたの投稿に #{user.username} さんがコメントしました。"
+      expect(page).to have_content "コメントしました。"
       expect(page).to have_content '「hello world」'
       expect(page).to have_content @post2.content
     end

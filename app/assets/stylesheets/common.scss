@@ -1,9 +1,86 @@
 body {
-  background-color: #fafafa;
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
   font-size: 14px;
-  color: #262626;
+  font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
 }
 
 ul {
   list-style-type: none;
+}
+
+/*typography */
+
+h3 {
+  color: gray;
+  position: relative;
+  padding: 1em 0;
+}
+h3:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-linear-gradient(to right, rgb(255, 186, 115), #ffb2b2);
+  background: linear-gradient(to right, rgb(255, 186, 115), #ffb2b2);
+}
+
+h4 {
+  color: gray;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  transition: .3s;
+  color: #ff4081
+}
+
+a::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: "";
+  width: 0;
+  height: 4px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+
+#top_logo {
+  font-size: 7.0em;
+  color: burlywood;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: "Righteous", cursive;
+  &:hover {
+    color: chocolate;
+    text-decoration: none;
+  }
+}
+
+#logo {
+  font-size: 3.0em;
+  color: burlywood;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: "Righteous", cursive;
+  &:hover {
+    color: chocolate;
+    text-decoration: none;
+  }
+}
+
+.gravatar {
+  border-radius: 50%;
+  padding-bottom: 5px;
 }

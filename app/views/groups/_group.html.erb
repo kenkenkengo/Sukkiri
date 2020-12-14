@@ -1,8 +1,8 @@
-<li id="group-<%= group.id %>">
-  <div class="row">
-    <div class="col-md-4">
-      <%= link_to "#{group.admin_user.username}", user_path(group.admin_user) %> |
+<div class="group-wrapper">
+  <li id="group-<%= group.id %>">
+    <h6>
+      <%= link_to "#{group.admin_user.username}", user_path(group.admin_user) %>のグループ：
       <%= link_to "#{group.name}", group_posts_path(group) %>
-    </div>
-  </div>
-</li>
+    </h6>
+  </li>
+</div>

@@ -1,38 +1,46 @@
-<li>
-  <div id="post-<%= post.id.to_s %>">
-  <%= post.user.username %>
-  <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
-  <%= post.content %>
-  <% if post.deadline.present? %>
-    <% if post.deadline <= Time.current %>
-      <div class="expirs">
-    <% elsif post.deadline - Time.current <= 7.days %>
-      <div class="approaching">
-    <% else %>
-      <div class="still">
-    <% end %>
-    <%= post.deadline.strftime("%Y年%m月%d日") %>
+<div class="col-md-4 col-sm-4">
+  <div class="post-container">
+    <div class="card mb-3">
+      <div class="card-header align-items-center d-flex">
+        <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
+        <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= post.content %></h5>
+        <%= gravatar_for(post.user, size: 25) %><%= post.user.username %>
+        <p class="card-text">
+          <%= post.note if post.note.present? %>
+          <% if post.deadline.present? %>
+          <% if post.deadline <= Time.current %>
+            <div class="expirs">
+          <% elsif post.deadline - Time.current <= 7.days %>
+            <div class="approaching">
+          <% else %>
+            <div class="still">
+          <% end %>
+            <%= "期限：#{post.deadline.strftime("%Y年%m月%d日")}" %>
+          </div>
+          <% end %>
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><%= time_ago_in_words(post.created_at).upcase + "前の投稿" %>
+          <% if current_user == post.user %>
+          <%= link_to "投稿編集", edit_group_post_path(group, post) %>
+          <% end %></small>
+        <div id="like-icon-post-<%= post.id.to_s %>">
+          <%= render "like_icon", { post: post, group: group } %>
+        </div>
+        <div id="like-text-post-<%= post.id.to_s %>">
+          <%= render "like_text", { likes: post.likes } %>
+        </div>
+        <div id="comment-post-<%= post.id.to_s %>">
+          <%= render 'comment_list', { post: post, group: group } %>
+        </div>
+        <div class="row actions" id="comment-form-post-<%= post.id.to_s %>">
+          <%= render 'comment_form', { post: post, group: group } %>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <%= post.note if post.note.present? %>
-  <%= link_to((image_tag post.image.thumb.url), group_post_path(group, post), remote: true ) %>
-  <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-  <% if current_user == post.user %>
-    <%= link_to "投稿編集", edit_group_post_path(group, post) %>
-  <% end %>
   </div>
-  <div id="like-icon-post-<%= post.id.to_s %>">
-    <%= render "like_icon", { post: post, group: group } %>
-  </div>
-  <div id="like-text-post-<%= post.id.to_s %>">
-    <%= render "like_text", { likes: post.likes } %>
-  </div>
-  <div id="comment-post-<%= post.id.to_s %>">
-    <%= render 'comment_list', { post: post, group: group } %>
-  </div>
-  <%= time_ago_in_words(post.created_at).upcase + "前" %>
-  <hr>
-  <div class="row actions" id="comment-form-post-<%= post.id.to_s %>">
-    <%= render 'comment_form', { post: post, group: group } %>
-  </div>
-</li>
+</div>

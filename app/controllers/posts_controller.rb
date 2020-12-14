@@ -57,7 +57,7 @@ class PostsController < ApplicationController
       @search_word = params[:q][:content_cont] if params[:q]
       @q = @group.posts.ransack(params[:q])
       @search_results = @q.result(distinct: true).sort_desc.paginate(
-        page: params[:page], per_page: 5
+        page: params[:page], per_page: 6
       )
     end
   end
@@ -78,12 +78,12 @@ class PostsController < ApplicationController
 
   def set_posts
     if request.fullpath.include?('sort')
-      @posts = @group.posts.includes(:user).order(params[:sort]).paginate(
-        page: params[:page], per_page: 5
+      @posts = @group.posts.includes(:user, :comments, :likes).order(params[:sort]).paginate(
+        page: params[:page], per_page: 6
       )
     else
-      @posts = @group.posts.includes(:user).sort_desc.paginate(
-        page: params[:page], per_page: 5
+      @posts = @group.posts.includes(:user, :comments, :likes).sort_desc.paginate(
+        page: params[:page], per_page: 6
       )
     end
   end

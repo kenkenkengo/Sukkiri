@@ -1,9 +1,21 @@
 .users {
   list-style: none;
-  margin: 0;
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid rgb(255, 187, 0);
   }
+}
+
+.groups {
+  list-style: none;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 2px solid rgb(255, 187, 0);
+  }
+}
+
+.group-wrapper {
+  margin-bottom: 40px;
 }

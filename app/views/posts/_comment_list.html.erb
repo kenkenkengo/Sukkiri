@@ -1,5 +1,5 @@
 <% post.comments.each do |comment| %>
-  <div class="mb-2">
+  <div class="mb-2 comment">
     <% if comment.user == current_user %>
       <%= link_to image_tag("delete.png", size: "10x10"), group_post_comment_path(group, post, comment), method: :delete, class: 'comment_delete', remote: true %>
     <% end %>

@@ -1,15 +1,11 @@
 <% provide(:title, "通知一覧") %>
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h3>通知一覧</h3>
-    </div>
-  </div>
+  <h3>通知一覧</h3>
   <% if @notifications.present? %>
-    <%= will_paginate @notifications, previous_label: '<', next_label: '>' %>
-      <ul class="notifications">
-        <%= render @notifications %>
-      </ul>
-    <%= will_paginate @notifications, previous_label: '<', next_label: '>' %>
+  <%= will_paginate @notifications, previous_label: '<', next_label: '>' %>
+  <div class="row">
+    <%= render @notifications %>
+  </div>
+  <%= will_paginate @notifications, previous_label: '<', next_label: '>' %>
   <% end %>
 </div>

@@ -1,8 +1,26 @@
-<%= render 'post_form', group: group, post: post %>
-<div class="sort">
-  <%= render 'sort_main_post.html.erb' %>
+<div class="row">
+  <%= render 'post_form', group: group, post: post %>
+  <div class="col-md-6">
+    <div class="profile-container text-center">
+      <div class="gravatar-wrapper">
+        <%= gravatar_for(group.admin_user, size: 100) %>
+      </div>
+      <h4>グループ管理者：<%= group.admin_user.username %></h4>
+      <% if current_user == group.admin_user %>
+      <h6><%= link_to "#{group.name}の編集", edit_group_path(group) %></h6>
+      <% end %>
+    </div>
+  </div>
 </div>
-<%= render 'search_form' %>
-<div class="posts">
-  <%= render @posts, group: group %>
+<div class="post-wrapper">
+  <h3>みんなの投稿一覧</h3>
+  <div class="row">
+    <%= render 'search_form' %>
+  </div>
+  <div class="sort">
+    <%= render 'sort_main_post.html.erb' %>
+  </div>
+  <div class="row">
+    <%= render @posts, group: group %>
+  </div>
 </div>

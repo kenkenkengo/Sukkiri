@@ -9,8 +9,8 @@
   <div class="sort">
     <%= render 'sort_search.html.erb' %>
   </div>
-  <ul class="search_results">
+  <div class="row">
     <%= render @search_results, group: @group %>
-  </ul>
+  </div>
   <%= will_paginate @search_results, previous_label: '<', next_label: '>' %>
 </div>

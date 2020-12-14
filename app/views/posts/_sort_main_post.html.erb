@@ -1,17 +1,17 @@
 <p>並べ替え:
   <% if request.fullpath.include?('deadline+asc') %>
-    <%= link_to "期限", sort: "deadline desc" %>
+    <%= link_to "期限", sort: "deadline desc" %> <i class="fas fa-caret-up"></i>
   <% else %>
-    <%= link_to "期限", sort: "deadline asc" %>
+    <%= link_to "期限", sort: "deadline asc" %> <i class="fas fa-caret-down"></i>
   <% end %>
   <% if request.fullpath.include?('id+asc') %>
-    <%= link_to "投稿日時", sort: "id desc" %>
+    <%= link_to "投稿日時", sort: "id desc" %> <i class="fas fa-caret-up"></i>
   <% else %>
-    <%= link_to "投稿日時", sort: "id asc" %>
+    <%= link_to "投稿日時", sort: "id asc" %> <i class="fas fa-caret-down"></i>
   <% end %>
   <% if request.fullpath.include?('updated_at+asc') %>
-    <%= link_to "更新日時", sort: "updated_at desc" %>
+    <%= link_to "更新日時", sort: "updated_at desc" %> <i class="fas fa-caret-up"></i>
   <% else %>
-    <%= link_to "更新日時", sort: "updated_at asc" %>
+    <%= link_to "更新日時", sort: "updated_at asc" %> <i class="fas fa-caret-down"></i>
   <% end %>
 </p>

@@ -1,7 +1,14 @@
-<h1>Sukkiri</h1>
-<p>家の中の書類をSukkiriで管理しましょう</p>
-<% if !user_signed_in? %>
-<%= link_to "新規登録", new_user_registration_path, class: "btn btn-secondary" %>
-<%= link_to "サインイン", new_user_session_path, class: "btn btn-primary" %>
-<% end %>
-<%= link_to "マイページ", user_path(current_user) if user_signed_in? %>
+<div class="main">
+  <div class="form-wrap text-center">
+    <div id="top_logo">
+      Sukkiri
+    </div>
+    <h5 class="text-secondary">家の中の書類をSukkiriで管理してみましょう</h5>
+    <% if !user_signed_in? %>
+    <div class="top_wrapper text-secondary">
+      <h5>採用担当者様専用サインインページはこちら</h5>
+      <h6><%= link_to "専用サインイン", new_user_session_path %></h6>
+    </div>
+    <% end %>
+  </div>
+</div>
