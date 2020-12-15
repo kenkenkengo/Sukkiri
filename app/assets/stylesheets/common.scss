@@ -16,20 +16,16 @@ ul {
 /*typography */
 
 h3 {
-  color: gray;
   position: relative;
   padding: 1em 0;
 }
+
 h3:after {
   content: "";
   display: block;
   height: 4px;
   background: -webkit-linear-gradient(to right, rgb(255, 186, 115), #ffb2b2);
   background: linear-gradient(to right, rgb(255, 186, 115), #ffb2b2);
-}
-
-h4 {
-  color: gray;
 }
 
 a {

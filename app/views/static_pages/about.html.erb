@@ -1,2 +1,209 @@
 <% provide(:title, "Sukkiriについて") %>
-<h1>Sukkiriについて</h1>
+<div class="row">
+  <div class="col-md-11">
+    <h2 class="title-about">Sukkiriとは?</h2>
+    <h6>家庭内の書類を、写真・メモと共に管理できるサービスです。
+      ペーパーレス化を目指しましょう!</h6>
+  </div>
+  <div class="col-md-11">
+    <h2 class="title-use">主な使い方</h2>
+    <div>
+      <ol class="main-use">
+        <li class="A">自分用の書類管理ツールとして使う</li>
+        <li class="B">家族内での書類管理ツールとして使う</li>
+      </ol>
+    </div>
+    <p class="about-line"></p>
+    <ol class="main-use">
+      <li class="A">自分用の書類管理ツールとして使う</li>
+    </ol>
+    <div class="use-content">
+      <p>自分だけの書類管理グループを作り、どんどん書類を登録しましょう。</p>
+      <p>「書類には期限があり、期限を忘れそう」という場合には、</p>
+      <p>登録時に期限を設定する事ができます。</p>
+      <p>期限は1週間前になると黄色で表示され、期限が過ぎると赤で表示されます。</p>
+      <p>また、書類名で検索し、すぐに検索する事ができます。</p>
+    </div>
+    <ol class="how-to-use">
+      <li>グループを作成する</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）「グループ新規作成」をクリックします。</p>
+            <%= image_tag("A-1-1.png", :alt => "A-1-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）グループ名を入力します。</p>
+            <%= image_tag("A-1-2.png", :alt => "A-1-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）グループ登録が完了しました！</p>
+            <%= image_tag("A-1-3.png", :alt => "A-1-3", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+      <li>新しい書類を写真やメモと共に追加</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-12">
+            書類登録には下記の情報を登録することができます。
+            <ul>
+              <li>写真</li>
+              <li>書類名</li>
+              <li>メモ</li>
+              <li>期限</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <p>（1）作成したグループに入ると、新規投稿フォームがあります。</p>
+            <%= image_tag("A-5-1.png", :alt => "A-5-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）フォームを入力し、「登録する」をクリックします。</p>
+            <%= image_tag("A-5-2.png", :alt => "A-5-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）一覧に投稿が表示されます。</p>
+            <%= image_tag("A-5-3.png", :alt => "A-5-3", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（4）写真をクリックすると、拡大表示ができます。</p>
+            <%= image_tag("A-5-4.png", :alt => "A-5-4", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（5）「投稿編集」をクリックすると、投稿編集を行う事もできます。</p>
+            <%= image_tag("A-5-5.png", :alt => "A-5-5", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（5）期限が過ぎていると、文字色が変わります。</p>
+            <%= image_tag("A-5-6.png", :alt => "A-5-6", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+      <li>投稿した書類を「like登録」</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）「<%= image_tag "like-parts.png", size: "20x20" %>」をクリックすると
+              like登録ができ、「<%= image_tag "liked-parts.png", size: "20x20" %>」に変化します。</p>
+            <%= image_tag("A-2-1.png", :alt => "A-2-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）メニューから「like一覧」をクリックします。</p>
+            <%= image_tag("A-2-2.png", :alt => "A-2-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）like登録済みの書類を見ることができます。</p>
+            <%= image_tag("A-2-3.png", :alt => "A-2-3", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+      <li>投稿済みの書類を検索</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）投稿一覧に検索バーがあります。</p>
+            <%= image_tag("A-3-1.png", :alt => "A-3-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）探したい書類に関連するワード（例えば「スーパー」）を入力します。</p>
+            <%= image_tag("A-3-2.png", :alt => "A-3-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）書類名に「スーパー」を含む投稿の一覧が表示されます。</p>
+            <%= image_tag("A-3-3.png", :alt => "A-3-3", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+      <li>投稿済みの書類を並べ替え表示</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）投稿一覧・検索結果画面に並べ替えバーがあります。</p>
+            <%= image_tag("A-4-1.png", :alt => "A-4-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）期限をクリックすると期限が近い順に投稿を並べ替えでき、再度クリックすると遠い順に並べ替えできます。</p>
+            <%= image_tag("A-4-2.png", :alt => "A-4-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）投稿日時・更新日時についても同様です。</p>
+            <%= image_tag("A-4-3.png", :alt => "A-4-3", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+    </ol>
+    <ol class="main-use">
+      <li class="B">家族内での書類管理ツールとして使う</li>
+    </ol>
+    <div class="use-content">
+      <p>グループの作成者がグループ管理者となり、グループに入れるメンバーを選択できるので、重要な書類も安全に管理できます。</p>
+      <p>あなたが桃太郎をグループメンバーに追加すれば、
+        桃太郎はグループ内に入る事ができ、投稿を見たり、投稿を作成する事が可能です。</p>
+      <p>反対に、桃太郎が作成したグループメンバーにあなたを追加してもらえば、あなたはそのグループに入る事ができます。</p>
+      <p>グループメンバーの追加・削除は、グループ新規作成フォームとグループ編集フォームで行えます。</p>
+      <p>あなたは、桃太郎の投稿で気になった書類をlike登録したり、コメントしたりできます。</p>
+    </div>
+    <ol class="how-to-use">
+      <li>グループメンバーの選択とグループの入室</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）「グループ新規作成」あるいは「グループ編集」をクリックします。</p>
+            <%= image_tag("B-1-1.png", :alt => "B-1-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）チェックボックスにてグループメンバーを選択します。</p>
+            <%= image_tag("B-1-2.png", :alt => "B-1-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）「登録する」あるいは「更新する」ボタンを押すとグループメンバーが登録されます。</p>
+            <%= image_tag("B-1-3.png", :alt => "B-1-3", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（4）プロフィールページ、あるいはヘッダーのグループ一覧より、グループに入室できます。</p>
+            <%= image_tag("B-1-4.png", :alt => "B-1-4", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+      <li>投稿にコメント（またはlike登録）</li>
+      <div class="use-explanation">
+        <div class="row">
+          <div class="col-md-4">
+            <p>（1）コメントを入力します。</p>
+            <%= image_tag("B-2-1.png", :alt => "B-2-1", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（2）コメントが追加されました！</p>
+            <%= image_tag("B-2-2.png", :alt => "B-2-2", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（3）コメント追加（またはlike登録）すると、投稿者の通知アイコンに黄色マークが付き、通知されます。</p>
+            <%= image_tag("B-2-3.png", :alt => "B-2-3", class: "use-picture") %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <p>（4）投稿者にlike登録があった旨の通知が届いています。</p>
+            <%= image_tag("B-2-4.png", :alt => "B-2-4", class: "use-picture") %>
+          </div>
+          <div class="col-md-4">
+            <p>（5）投稿者にコメントがあった旨の通知が届いています。</p>
+            <%= image_tag("B-2-5.png", :alt => "B-2-5", class: "use-picture") %>
+          </div>
+        </div>
+      </div>
+    </ol>
+  </div>
+  <div class="col-md-5">
+    <h6>以上です。さあ、Sukkiriで書類を管理していきましょう!</h6>
+  </div>
+  <div class="col-md-5">
+    <% if user_signed_in? %>
+      <p><%= link_to "グループ新規作成", new_group_path %>はこちら</p>
+    <% else %>
+      <p><%= link_to "サインイン", new_user_registration_path %>はこちら</p>
+    <% end %>
+  </div>
+
+</div>
