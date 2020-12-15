@@ -69,12 +69,6 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
-        environment:
-          - RAILS_ENV: test
-      - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          - MYSQL_HOST: '127.0.0.1'
     working_directory: ~/Sukkiri
     steps:
       - checkout
@@ -92,11 +86,11 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             fi
-          no_output_timeout: 30m
       - run:
           name: Run post-deploy tasks
           command: |
             heroku run rails db:migrate --app ${HEROKU_APP_NAME}
+            heroku run rails db:seed --app ${HEROKU_APP_NAME}
 
 workflows:
   version: 2

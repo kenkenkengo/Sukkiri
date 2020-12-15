@@ -2,21 +2,6 @@
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, .0975);
   height: 77px;
-  #logo{
-    float: left;
-    margin-right: 10px;
-    font-size: 3.0em;
-    color: burlywood;
-    text-transform: downcase;
-    letter-spacing: -1px;
-    padding-top: 9px;
-    font-weight: bold;
-    text-decoration: none;
-    &:hover {
-      color: chocolate;
-      text-decoration: none;
-    }
-  }
   &-nav {
     & > li {
       margin-left: 20px;
@@ -43,4 +28,8 @@
       }
     }
   }
+}
+
+.logo-parts {
+  padding: 0 10px;
 }

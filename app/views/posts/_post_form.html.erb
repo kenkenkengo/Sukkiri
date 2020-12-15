@@ -1,24 +1,26 @@
-<div class="form">
-  <%= form_for [group, post] do |f| %>
-  <div class="form-group">
-    <%= f.label :写真名 %>
-    <%= f.text_field :content, class: 'form-control', placeholder: '写真名' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :image, class: 'form__mask__image' do %>
-    <%= f.file_field :image, class: 'hidden' %>
+<div class="col-md-6">
+  <div class="form">
+    <%= form_for [group, post] do |f| %>
+    <div class="form-group">
+      <%= f.label :写真名 %>
+      <%= f.text_field :content, class: 'form-control', placeholder: '写真名' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :image, class: 'form__mask__image' do %>
+      <%= f.file_field :image, class: 'hidden' %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <%= f.label :メモ %>
+      <%= f.text_area :note, class: 'form-control', placeholder: 'メモ' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :期限 %>
+      <%= f.date_field :deadline, class: 'form-control' %>
+    </div>
+    <div class="text-right">
+      <%= f.submit class: 'btn btn-secondary' %>
+    </div>
     <% end %>
   </div>
-  <div class="form-group">
-    <%= f.label :メモ %>
-    <%= f.text_field :note, class: 'form-control', placeholder: 'メモ' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :期限 %>
-    <%= f.date_field :deadline, class: 'form-control' %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>
-  <% end %>
 </div>

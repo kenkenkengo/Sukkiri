@@ -1,4 +1,5 @@
 <% provide(:title, "サインイン") %>
+<%= render 'shared/recruit_signin' %>
 <div class="main">
   <div class="card devise-card">
     <div class="form-wrap">
@@ -16,7 +17,9 @@
           <%= f.submit "サインインする", class: "btn btn-primary w-100" %>
         </div>
       <% end %>
-      <%= link_to image_tag("f_logo.png", :width => '40', :height => '40'), user_facebook_omniauth_authorize_path %>
+      <div class="logo-wrapper">
+        <%= link_to image_tag("f_logo.png", size: '30x30'), user_facebook_omniauth_authorize_path %>
+      </div>
       <p class="devise-link">
         アカウントをお持ちでないですか？
         <%= link_to "登録する", new_user_registration_path %>

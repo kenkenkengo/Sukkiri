@@ -18,6 +18,11 @@ RSpec.describe Post, type: :model do
       expect(post).to be_invalid
     end
 
+    it "contentがなければ無効である" do
+      post = build(:post, :image, content: nil, user: user, group: temp_group)
+      expect(post).to be_invalid
+    end
+
     it "imageがなければ無効である" do
       post = build(:post, image: nil, user: user, group: temp_group)
       expect(post).to be_invalid

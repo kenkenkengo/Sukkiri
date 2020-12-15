@@ -11,13 +11,8 @@ RSpec.describe "静的ページ", type: :system do
     end
 
     context "ログインしていない場合" do
-      it "「新規登録」が表示される" do
-        click_on('新規登録')
-        expect(current_path).to eq new_user_registration_path
-      end
-
-      it "「サインイン」が表示される" do
-        click_on('サインイン')
+      it "「専用サインイン」が表示される" do
+        click_on('専用サインイン')
         expect(current_path).to eq new_user_session_path
       end
     end
@@ -28,8 +23,8 @@ RSpec.describe "静的ページ", type: :system do
         visit root_path
       end
 
-      it "「マイページ」が表示される" do
-        expect(page).to have_link 'マイページ', href: user_path(user)
+      it "「専用サインイン」が表示されない" do
+        expect(page).not_to have_content '専用サインイン'
       end
     end
   end

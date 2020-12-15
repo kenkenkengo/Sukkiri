@@ -1,34 +1,54 @@
 <% provide(:title, @user.username) %>
-<h1>プロフィール</h1>
-<%= gravatar_for @user %><br>
-<%= @user.username %>, <%= @user.email %>
-<% if @user == current_user %>
-<%= link_to "プロフィールを編集", edit_user_registration_path %>
-<%= link_to "グループ新規作成", new_group_path %>
-<% end %>
-<h3><%= "#{@user.username}が管理者であるグループ一覧" %></h3>
-<% @admin_groups.each do |group| %>
-  <li>
-    <%= link_to group.name, group_posts_path(group) %>
-  </li>
-<% end %>
-<div class="user_belonging">
-  <h3><%= "#{@user.username}が入室できるグループ一覧" %></h3>
-  <% @user.groups.each do |group| %>
-    <li>
-      <%= link_to group.name, group_posts_path(group) %>
-    </li>
-  <% end %>
-</div>
-<div class="current_user_belonging">
-  <% unless @user == current_user %>
-    <h3><%= "あなたが入室できる#{@user.username}のグループ一覧" %></h3>
-    <% @admin_groups.each do |group| %>
-      <% if belonging?(group) %>
-        <li>
-          <%= link_to group.name, group_posts_path(group) %>
-        </li>
+<h3>プロフィール</h3>
+<div class="row">
+  <div class="col-md-6">
+    <div class="profile-container text-center">
+      <div class="gravatar-wrapper">
+        <%= gravatar_for(@user, size: 160) %>
+      </div>
+      <h4><%= @user.username %></h4>
+      <% if @user == current_user %>
+        <h6>
+          <%= link_to "プロフィールを編集", edit_user_registration_path %>
+          <span class="subject-line">
+            <%= link_to "グループ新規作成", new_group_path %>
+          </span>
+        </h6>
       <% end %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="group-container">
+      <h4 class="subject-line"><%= "#{@user.username}が管理者であるグループ一覧" %></h4>
+      <div class="group-list-wrapper">
+        <% @admin_groups.each do |group| %>
+          <h6><%= link_to group.name, group_posts_path(group) %></h6>
+        <% end %>
+      </div>
+    </div>
+    <div class="group-container">
+      <div class="user_belonging">
+        <h4 class="subject-line"><%= "#{@user.username}が入室できるグループ一覧" %></h4>
+        <div class="group-list-wrapper">
+          <% @user.groups.each do |group| %>
+            <h6><%= link_to group.name, group_posts_path(group) %></h6>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="group-container">
+      <div class="current_user_belonging">
+        <% unless @user == current_user %>
+          <h4 class="subject-line"><%= "あなたが入室できる#{@user.username}のグループ一覧" %></h4>
+          <div class="group-list-wrapper">
+            <% @admin_groups.each do |group| %>
+              <% if belonging?(group) %>
+                <h6><%= link_to group.name, group_posts_path(group) %></h6>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

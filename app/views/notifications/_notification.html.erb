@@ -1,26 +1,24 @@
-<li id="notification-<%= notification.id %>">
-  <div>
-    <% if notification.liked_to_post? %>
-      <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-      <p class="notification-message">あなたの投稿が
-      <%= link_to notification.active_user.username, user_path(notification.active_user) %>
-      さんにlike登録されました。</p>
-    <% elsif notification.commented_to_post? %>
-      <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-      <p class="notification-message">あなたの投稿に
-      <%= link_to notification.active_user.username, user_path(notification.active_user) %>
-      さんがコメントしました。
-      「<%= notification.comment %>」</p>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-md-2">
-      <%= link_to((image_tag notification.activated_post.image.thumb_small.url), 
+<div class="col-md-3">
+  <div id="notification-<%= notification.id %>">
+    <div class="notificate-wrapper">
+      <div class="notificate-border">
+        <% if notification.liked_to_post? %>
+        <small><%= notification.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
+        <p class="notification-message">あなたの投稿が
+          <%= link_to notification.active_user.username, user_path(notification.active_user) %>さんに<br>
+          like登録されました。</p>
+        <% elsif notification.commented_to_post? %>
+        <small><%= notification.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
+        <p class="notification-message">あなたの投稿に
+          <%= link_to notification.active_user.username, user_path(notification.active_user) %>さんが<br>
+          コメントしました。<br>
+          「<%= notification.comment %>」</p>
+        <% end %>
+      </div>
+      <h6 class="text-secondary"><%= notification.activated_post.content %></h6>
+      <%= link_to((image_tag notification.activated_post.image.thumb_small.url),
       group_post_path(notification.activated_group, notification.activated_post), remote: true) %>
       <div id="image-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
-    <div class="col-md-7">
-      <p><%= notification.activated_post.content %></p>
-    </div>
   </div>
-</li>
+</div>

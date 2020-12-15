@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = current_user.groups.paginate(page: params[:page], per_page: 5)
+    @groups = current_user.groups.includes(:users).paginate(page: params[:page], per_page: 5)
   end
 
   def create

@@ -13,7 +13,6 @@ RSpec.describe "Users", type: :system do
 
     it "ユーザー情報が表示されることを確認" do
       expect(page).to have_content user.username
-      expect(page).to have_content user.email
     end
 
     context "サインインユーザーのユーザープロフィールを表示する時" do
