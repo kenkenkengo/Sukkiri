@@ -5,6 +5,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "トップページ" do
       visit root_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).not_to have_link 'グループ一覧', href: groups_path
       expect(page).not_to have_link 'like一覧', href: likes_path(user)
       expect(page).not_to have_link 'ユーザー一覧', href: users_path
@@ -16,6 +17,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "サインアップページ" do
       visit new_user_registration_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).not_to have_link 'グループ一覧', href: groups_path
       expect(page).not_to have_link 'like一覧', href: likes_path(user)
       expect(page).not_to have_link 'ユーザー一覧', href: users_path
@@ -27,6 +29,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "サインインページ" do
       visit new_user_session_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).not_to have_link 'グループ一覧', href: groups_path
       expect(page).not_to have_link 'like一覧', href: likes_path(user)
       expect(page).not_to have_link 'ユーザー一覧', href: users_path
@@ -38,6 +41,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "Sukkiriについてページ" do
       visit about_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).not_to have_link 'グループ一覧', href: groups_path
       expect(page).not_to have_link 'like一覧', href: likes_path(user)
       expect(page).not_to have_link 'ユーザー一覧', href: users_path
@@ -49,6 +53,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "利用規約ページ" do
       visit terms_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).not_to have_link 'グループ一覧', href: groups_path
       expect(page).not_to have_link 'like一覧', href: likes_path(user)
       expect(page).not_to have_link 'ユーザー一覧', href: users_path
@@ -68,6 +73,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "トップページ" do
       visit root_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -79,6 +85,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "ユーザープロフィールページ" do
       visit user_path(user)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -90,6 +97,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "ユーザー編集ページ" do
       visit edit_user_registration_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -101,6 +109,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "ユーザー一覧ページ" do
       visit users_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -112,6 +121,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "パスワード変更ページ" do
       visit edit_password_path(user)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -123,6 +133,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "Sukkiriについてページ" do
       visit about_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -134,6 +145,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "利用規約ページ" do
       visit terms_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -145,6 +157,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "投稿一覧ページ" do
       visit group_posts_path(@group)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -156,6 +169,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "投稿編集ページ" do
       visit group_posts_path(@group, @post)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -167,6 +181,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "グループ新規作成ページ" do
       visit new_group_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -178,6 +193,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "グループ編集ページ" do
       visit edit_group_path(@group)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -189,6 +205,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "like一覧" do
       visit likes_path(user)
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -200,6 +217,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "通知一覧" do
       visit notifications_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
@@ -211,6 +229,7 @@ RSpec.describe "ヘッダー表示", type: :system do
     it "グループ一覧" do
       visit groups_path
       expect(page).to have_link 'Sukkiri', href: root_path
+      expect(page).to have_link 'Sukkiriについて', href: about_path
       expect(page).to have_link 'グループ一覧', href: groups_path
       expect(page).to have_link 'like一覧', href: likes_path(user)
       expect(page).to have_link 'ユーザー一覧', href: users_path
